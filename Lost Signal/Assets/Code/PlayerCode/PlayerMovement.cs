@@ -13,24 +13,29 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     bool isGrounded;
+    bool wasGrounded;
     // Start is called before the first frame update
     void Start()
     {
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        isGrounded = Physics2D.CircleCast(new Vector2(groundSensor.position.x, groundSensor.position.y), 0.1f, Vector2.zero);
+        isGrounded = Physics2D.CircleCast(new Vector2(groundSensor.position.x, groundSensor.position.y), 0.1f, Vector2.zero, 0, LayerMask.GetMask("Middleground"));
         // movement on x axis
         float movement = Input.GetAxis("Horizontal");
-        Debug.Log(isGrounded);
-        rb.AddForce(new Vector2(movement*100*movementSpeed, 0), ForceMode2D.Force);
+
         
-        if(isGrounded && Input.GetButtonDown("Jump"))
+        transform.position += new Vector3(movement*movementSpeed* 0.1f , 0, 0);
+
+
+        
+        if(isGrounded && Input.GetButton("Jump") && wasGrounded == true)
         {
-            rb.AddForce(Vector2.up * jumpStrength, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpStrength * 100, ForceMode2D.Impulse);
         }
+        wasGrounded = isGrounded;
         
 
 
