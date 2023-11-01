@@ -231,7 +231,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.62103
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2158,6 +2158,7 @@ GameObject:
   - component: {fileID: 1171915302}
   - component: {fileID: 1171915301}
   - component: {fileID: 1171915300}
+  - component: {fileID: 1171915306}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -2177,11 +2178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4373b0bfe245b4b8a0e0583782e066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 2
-  jumpStrength: 3
   groundSensor: {fileID: 1095454914}
-  rb: {fileID: 1171915303}
-  delayJump: 0.3
+  movementSpeed: 2
+  jumpStrength: 3.5
+  delayJump: 0.2
 --- !u!58 &1171915301
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2214,9 +2214,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010868239, y: -0.07879686}
+  m_Offset: {x: 0.0050963643, y: -0.07879686}
   serializedVersion: 2
-  m_Radius: 0.110842586
+  m_Radius: 0.11661446
 --- !u!61 &1171915302
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2249,7 +2249,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0063372664, y: 0.0072831064}
+  m_Offset: {x: 0.0051017404, y: 0.00491637}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2260,7 +2260,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.22763863, y: 0.283739}
+  m_Size: {x: 0.22901562, y: 0.28847247}
   m_EdgeRadius: 0
 --- !u!50 &1171915303
 Rigidbody2D:
@@ -2357,6 +2357,27 @@ Transform:
   - {fileID: 1095454914}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1171915306
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171915299}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 50f4974e53148b14592575d3fc07f9d0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1442369614
 GameObject:
   m_ObjectHideFlags: 0
