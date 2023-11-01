@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpStrength;
     [SerializeField] private float delayJump  = 0.5f;
     private float delayCounter;
+    bool JumpWasPressed;
 
 
     // Start is called before the first frame update
@@ -38,9 +39,13 @@ public class PlayerMovement : MonoBehaviour
         CheckSurroundings();
         //gets input
         movement = Input.GetAxis("Horizontal");
-
+        //check if jump was pressed and keep it pressed until fixedUpdate notices
+        if (Input.GetButtonDown("Jump"))
+            JumpWasPressed = true;
+        //if (Input.GetButtonDown("Jump"))
+            //Debug.Log("has pressed jump");
         //counter to jump delay
-        if(!isGrounded)
+        if (!isGrounded)
         {
             delayCounter = 0;
         }
@@ -66,7 +71,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // movement on x axis
         
 
         // if stuck on wall dont try to move in its direction
@@ -74,15 +78,26 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position += new Vector3(movement*movementSpeed* 0.1f , 0, 0);
         }
-        
-        // if the player is on the ground, and was on the ground in the last frame and the player pressed jump and waited the delay, then jump
-        if(isGrounded && Input.GetButton("Jump") && wasGrounded == true && delayCounter >= delayJump)
+
+        //nullifize jumping independently if is in the air
+        if(JumpWasPressed && !isGrounded)
         {
-            rb.AddForce(Vector2.up * jumpStrength * 100, ForceMode2D.Impulse);
+            JumpWasPressed = false;
+        }
+        // if the player is on the ground, and was on the ground in the last frame
+        if (isGrounded && wasGrounded == true)
+        {
+
+            //if the player had kept jump down and waited the delay time or he released jump and jumped again, then jump
+            if((Input.GetButton("Jump") && delayCounter >= delayJump) || JumpWasPressed)
+            {
+                JumpWasPressed = false;
+                rb.AddForce(Vector2.up * jumpStrength * 100, ForceMode2D.Impulse);
+            }
+            
         }
         wasGrounded = isGrounded;
 
-        Debug.Log(isGrounded + " " + isStuckOnLeftWall);
     }
 
     void CheckSurroundings()
@@ -92,6 +107,12 @@ public class PlayerMovement : MonoBehaviour
         //checks if next to a wall
         isStuckOnLeftWall = Physics2D.BoxCast(new Vector2(transform.position.x-0.3f,transform.position.y), new Vector2(0.7f,1.2f), 0.0f, Vector2.right, 0, LayerMask.GetMask("Middleground"));
         isStuckOnRightWall = Physics2D.BoxCast(new Vector2(transform.position.x+0.4f,transform.position.y), new Vector2(0.7f,1.2f), 0.0f, Vector2.right, 0, LayerMask.GetMask("Middleground"));
+        //Debug.Log(isStuckOnRightWall);
+    }
+
+    void HandleMovements()
+    {
+
     }
 
     void Flip()
