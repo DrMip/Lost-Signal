@@ -13,8 +13,8 @@ public class PlayerMovement : MonoBehaviour
     //other components
     [SerializeField] private Transform groundSensor;
     //variables for checking surroundings
-    bool isGrounded;
-    bool wasGrounded;
+    public bool isGrounded;
+    public bool wasGrounded;
     bool isStuckOnLeftWall;
     bool isStuckOnRightWall;
     //variables for movement x,y 
@@ -23,9 +23,7 @@ public class PlayerMovement : MonoBehaviour
     bool lookingRight = true;
     //variables for jumping
     [SerializeField] private float jumpStrength;
-    [SerializeField] private float delayJump  = 0.5f;
-    private float delayCounter;
-    bool JumpWasPressed;
+    private JumpScript jmp;
 
 
     // Start is called before the first frame update
@@ -33,26 +31,13 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
+        jmp = GetComponent<JumpScript>();
     }
     void Update()
     {
         CheckSurroundings();
         //gets input
         movement = Input.GetAxis("Horizontal");
-        //check if jump was pressed and keep it pressed until fixedUpdate notices
-        if (Input.GetButtonDown("Jump"))
-            JumpWasPressed = true;
-        //if (Input.GetButtonDown("Jump"))
-            //Debug.Log("has pressed jump");
-        //counter to jump delay
-        if (!isGrounded)
-        {
-            delayCounter = 0;
-        }
-        if(delayCounter < delayJump)
-        {
-            delayCounter += Time.deltaTime;
-        }
 
         //checks if needs to flip direction
         if(movement > 0 && !lookingRight)
@@ -63,10 +48,10 @@ public class PlayerMovement : MonoBehaviour
         {
             Flip();
         }
-
+        
         HandleAnimations();
 
-
+        
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -79,25 +64,14 @@ public class PlayerMovement : MonoBehaviour
             transform.position += new Vector3(movement*movementSpeed* 0.1f , 0, 0);
         }
 
-        //nullifize jumping independently if is in the air
-        if(JumpWasPressed && !isGrounded)
-        {
-            JumpWasPressed = false;
-        }
-        // if the player is on the ground, and was on the ground in the last frame
-        if (isGrounded && wasGrounded == true)
-        {
 
-            //if the player had kept jump down and waited the delay time or he released jump and jumped again, then jump
-            if((Input.GetButton("Jump") && delayCounter >= delayJump) || JumpWasPressed)
-            {
-                JumpWasPressed = false;
-                rb.AddForce(Vector2.up * jumpStrength * 100, ForceMode2D.Impulse);
-            }
+        if(jmp.Jump)
+        {
+            rb.AddForce(Vector2.up * jumpStrength * 100, ForceMode2D.Impulse);
+            jmp.Jump = false;
+        }
             
-        }
         wasGrounded = isGrounded;
-
     }
 
     void CheckSurroundings()
