@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     //components of the player
     private Rigidbody2D rb;
     private Animator ani;
+    private JumpScript jmp;
+    private PlayerBehavior pb;
     //other components
     [SerializeField] private Transform groundSensor;
     //variables for checking surroundings
@@ -18,12 +20,12 @@ public class PlayerMovement : MonoBehaviour
     bool isStuckOnLeftWall;
     bool isStuckOnRightWall;
     //variables for movement x,y 
-    [SerializeField] private int movementSpeed;
+    private float movementSpeed;
     float movement;
     bool lookingRight = true;
     //variables for jumping
-    [SerializeField] private float jumpStrength;
-    private JumpScript jmp;
+    private float jumpStrength;
+    
 
 
     // Start is called before the first frame update
@@ -32,6 +34,13 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
         jmp = GetComponent<JumpScript>();
+        pb = GetComponent<PlayerBehavior>();
+        transform.position = new Vector3 (-4,0);
+
+        //initialize constants
+        movementSpeed = pb.MovementSpeed;
+        jumpStrength = pb.JumpStrength;
+        Debug.Log(movementSpeed);
     }
     void Update()
     {

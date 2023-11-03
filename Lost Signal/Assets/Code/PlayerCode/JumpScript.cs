@@ -7,9 +7,10 @@ public class JumpScript : MonoBehaviour
     //script is in charge to know *when* to jump
     private PlayerMovement plm;
     private Rigidbody2D rb;
+    private PlayerBehavior pb;
 
     public bool Jump;
-    [SerializeField] float delayJump = 0.3f;
+    private float delayJump = 0.3f;
     private bool JumpWasPressed;
 
     float delayCounter;
@@ -21,7 +22,7 @@ public class JumpScript : MonoBehaviour
     //handles delayed jumping
     float groundedDelayCounter;
 
-    [SerializeField] float groundedDelayAmount = 0.1f;
+    private float groundedDelayAmount = 0.1f;
     
     bool delayedIsGrounded;
 
@@ -35,6 +36,10 @@ public class JumpScript : MonoBehaviour
     {
         plm = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
+        pb = GetComponent<PlayerBehavior>();
+        //initialize constants
+        delayJump = pb.DelayJump;
+        groundedDelayAmount = pb.GroundedDelayAmount;
     }
 
     // Update is called once per frame
@@ -47,20 +52,20 @@ public class JumpScript : MonoBehaviour
         //handles grounded delay(delays grounded to make platform nicer to jump from)
         if(plm.isGrounded)
         {
-            Debug.Log("is on the ground");
+            //Debug.Log("is on the ground");
             delayedIsGrounded = true;
             groundedDelayCounter = 0;
         }
         //instantiate delay jump if player is falling, he was grounded, and we havn't instatianted yet
         else if(rb.velocity.y <=0 && plm.wasGrounded && groundedDelayCounter == 0)
         {
-            Debug.Log("left the ground");
+            //Debug.Log("left the ground");
             groundedDelayCounter = 0.0001f;
         }
         //if falling and isnt grounded, start counting the delay
         else if(groundedDelayCounter > 0)
         {
-            Debug.Log("is delaying grounded " + delayedIsGrounded + plm.isGrounded);
+            //Debug.Log("is delaying grounded " + delayedIsGrounded + plm.isGrounded);
             //Debug.Log(rb.velocity.y);
             if(groundedDelayCounter < groundedDelayAmount)
             {
@@ -75,7 +80,7 @@ public class JumpScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("no longer delayed jump");
+            //Debug.Log("no longer delayed jump");
             delayedIsGrounded = false;
         }
         //counter to jump delay
