@@ -40,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
         //initialize constants
         movementSpeed = pb.MovementSpeed;
         jumpStrength = pb.JumpStrength;
-        Debug.Log(movementSpeed);
     }
     void Update()
     {
