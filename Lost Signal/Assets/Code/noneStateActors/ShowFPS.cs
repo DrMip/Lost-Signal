@@ -21,7 +21,7 @@ public class ShowFPS : MonoBehaviour
 
         if(time >= polling_time)
         {
-            Debug.Log(Mathf.RoundToInt(framecount / time));
+            //Debug.Log(Mathf.RoundToInt(framecount / time));
             time = 0;
             framecount = 0;
             

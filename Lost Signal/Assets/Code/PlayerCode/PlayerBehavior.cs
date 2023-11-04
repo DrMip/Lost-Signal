@@ -25,8 +25,9 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] public float GroundedDelayAmount = 0.1f;
 
     [Header("Shooting")]
-    [SerializeField] public float shotTime;
-    [SerializeField] public float shotSpeed;
+    [SerializeField] public float ShotTime;
+    [SerializeField] public float ShotSpeed = 3;
+    [SerializeField] public float ShotDecayTime = 3;
 
 
 
