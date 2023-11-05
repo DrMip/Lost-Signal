@@ -3685,7 +3685,7 @@ MonoBehaviour:
   JumpStrength: 3.5
   DelayJump: 0.2
   GroundedDelayAmount: 0.05
-  ShotTime: 0.2
+  ShotTime: 0.3
   ShotSpeed: 4
   ShotDecayTime: 0.5
 --- !u!114 &1171915310

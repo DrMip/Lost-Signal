@@ -95,6 +95,7 @@ public class ShootingPlayer : MonoBehaviour
         {
             shotTimeCounter = 0;
             Shoot();
+            animPlayer.SetBool("Shooting", false);
             pressedShoot = false;
         }
         for(int i = 0; i < shots.Count; i++)
@@ -127,8 +128,6 @@ public class ShootingPlayer : MonoBehaviour
         //get scale
         Xscale = shot.shotObject.transform.localScale.x;
         shot.Xdirection = (transform.localScale.x > 0) ? 1:(-1);
-        //gets component
-        animShot = shot.shotObject.GetComponent<Animator>();
         //sets counter
         shot.shotDecayTimeCounter = 0;
         shots.Add(shot);
@@ -136,6 +135,7 @@ public class ShootingPlayer : MonoBehaviour
     }
     void CheckandEndShot(Shot shot)
     {
+        animShot = shot.shotObject.GetComponent<Animator>();
         //destroy shot if animation ended (animation would be the exploded because of hit)
         if(animShot.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f && !animShot.IsInTransition(0) && shot.hit)
         {
