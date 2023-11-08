@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator ani;
     private JumpScript jmp;
     private PlayerBehavior pb;
+    
     //other components
     [SerializeField] private Transform groundSensor;
     //variables for checking surroundings
@@ -20,11 +21,12 @@ public class PlayerMovement : MonoBehaviour
     bool isStuckOnLeftWall;
     bool isStuckOnRightWall;
     //variables for movement x,y 
-    private float movementSpeed;
+    //private float movementSpeed;
     float movement;
     bool lookingRight = true;
     //variables for jumping
-    private float jumpStrength;
+    //private float jumpStrength;
+    bool jetting;
     
 
 
@@ -38,8 +40,8 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3 (-4,0);
 
         //initialize constants
-        movementSpeed = pb.MovementSpeed;
-        jumpStrength = pb.JumpStrength;
+        //movementSpeed = pb.MovementSpeed;
+        //jumpStrength = pb.JumpStrength;
     }
     void Update()
     {
@@ -56,6 +58,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Flip();
         }
+        //if is pressing jet, and is registed as grounded and has jetpower say jetting is true
+        if(Input.GetButton("Jetpack") && jmp.delayedIsGrounded && pb.JetTimeCounter != 0)
+        {
+            jetting = true;
+        }
+        else
+            jetting = false;
         
         HandleAnimations();
 
@@ -69,16 +78,20 @@ public class PlayerMovement : MonoBehaviour
         // if stuck on wall dont try to move in its direction
         if((!isStuckOnLeftWall || movement >= 0) && (!isStuckOnRightWall || movement <= 0))
         {
-            transform.position += new Vector3(movement*movementSpeed* 0.1f , 0, 0);
+            transform.position += new Vector3(movement*pb.MovementSpeed* 0.1f , 0, 0);
         }
-
-
-        if(jmp.Jump)
+        if(jmp.Jump|| jetting)
+            Debug.Log(jmp.Jump + " " + jetting);
+        //if jump and not jetting
+        if(jmp.Jump && !jetting)
         {
-            rb.AddForce(Vector2.up * jumpStrength * 100, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * pb.JumpStrength * 100, ForceMode2D.Impulse);
             jmp.Jump = false;
         }
-            
+        else
+            jmp.Jump = false;
+        
+        
         wasGrounded = isGrounded;
     }
 

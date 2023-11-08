@@ -24,7 +24,7 @@ public class JumpScript : MonoBehaviour
 
     private float groundedDelayAmount = 0.1f;
     
-    bool delayedIsGrounded;
+    public bool delayedIsGrounded;
 
 
 
@@ -94,8 +94,6 @@ public class JumpScript : MonoBehaviour
         }
 
         //Debug.Log(delayedIsGrounded + " " + plm.isGrounded);
-        
-
 
     }
 
@@ -106,14 +104,16 @@ public class JumpScript : MonoBehaviour
         {
             JumpWasPressed = false;
         }
+        
         // if the player is on the ground, and was on the ground in the last frame
         if (delayedIsGrounded && WasDelayGrounded == true)
         {
             //if the player had kept jump down and waited the delay time or he released jump and jumped again, and he isn't already jumping, then jump
             if(((Input.GetButton("Jump") && delayCounter >= delayJump) || JumpWasPressed) && !isInJump)
             {
-                isInJump = true;
-                Jump = true;
+                    isInJump = true;
+                    Jump = true;
+
             }
         }
         WasDelayGrounded = delayedIsGrounded;

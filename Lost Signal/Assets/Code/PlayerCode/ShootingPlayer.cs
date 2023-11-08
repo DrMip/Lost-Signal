@@ -25,9 +25,9 @@ public class ShootingPlayer : MonoBehaviour
     [SerializeField] string ExplodeAnimWall = "";
     [SerializeField] string ExplodeAnimEnemy = "";
     //shooting variables
-    private float shotTime;
-    private float shotSpeed;
-    private float shotDecayTime;
+    //private float shotTime;
+    //private float shotSpeed;
+    //private float shotDecayTime;
     //bool isShotRight;
     bool pressedShoot;
     //bool hit;
@@ -47,9 +47,9 @@ public class ShootingPlayer : MonoBehaviour
         pb = GetComponent<PlayerBehavior>();
         animPlayer = GetComponent<Animator>();
 
-        shotTime = pb.ShotTime;
-        shotSpeed = pb.ShotSpeed;
-        shotDecayTime = pb.ShotDecayTime;
+        //shotTime = pb.ShotTime;
+        //shotSpeed = pb.ShotSpeed;
+        //shotDecayTime = pb.ShotDecayTime;
 
         //set layers
         environment = LayerMask.GetMask("Middleground");
@@ -87,7 +87,7 @@ public class ShootingPlayer : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(shotTimeCounter < shotTime && pressedShoot)
+        if(shotTimeCounter < pb.ShotTime && pressedShoot)
         {
             shotTimeCounter += Time.deltaTime;
         }
@@ -103,7 +103,7 @@ public class ShootingPlayer : MonoBehaviour
             if(!shots[i].hit)
             {
                 //make it go
-                shots[i].shotObject.transform.position += new Vector3(shots[i].Xdirection*shotSpeed* 0.1f , 0, 0);
+                shots[i].shotObject.transform.position += new Vector3(shots[i].Xdirection*pb.ShotSpeed* 0.1f , 0, 0);
             }
         }
 
@@ -146,7 +146,7 @@ public class ShootingPlayer : MonoBehaviour
             //Debug.Log(hit + " 1");
         }
         //if timer hasnt finished
-        else if(shot.shotDecayTimeCounter < shotDecayTime && !shot.hit)
+        else if(shot.shotDecayTimeCounter < pb.ShotDecayTime && !shot.hit)
         {
             //Debug.Log(hit + " 2");
             //continue running timer

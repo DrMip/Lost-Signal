@@ -9,25 +9,30 @@ public class PlayerBehavior : MonoBehaviour
 
     //Health
     [Header("Health")]
-    [SerializeField] public float MaxHealth;
+    public float MaxHealth;
     //float health;
     //bool dead = false;
     //wrath
     [Header("Wrath")]
-    [SerializeField] public float MaxWrath;
+    public float MaxWrath;
     //float wrath;
     [Header("X,Y movements")]
-    [SerializeField] public float MovementSpeed;
+    public float MovementSpeed;
 
     [Header("Jumping")]
-    [SerializeField] public float JumpStrength;
-    [SerializeField] public float DelayJump = 0.3f;
-    [SerializeField] public float GroundedDelayAmount = 0.1f;
+    public float JumpStrength;
+    public float DelayJump = 0.3f;
+    public float GroundedDelayAmount = 0.1f;
 
     [Header("Shooting")]
-    [SerializeField] public float ShotTime;
-    [SerializeField] public float ShotSpeed = 3;
-    [SerializeField] public float ShotDecayTime = 3;
+    public float ShotTime;
+    public float ShotSpeed = 3;
+    public float ShotDecayTime = 3;
+    [Header("Jetpack")]
+    public float JetPackStrength;
+    public float JetTime;
+    public float JetTimeCounter;
+    public float JetRecoverRatio = 0.5f;
 
 
 
@@ -40,9 +45,10 @@ public class PlayerBehavior : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    // for centeralize main variables and functions
     void Update()
     {
-        
+        //checks if grounded
+        //isGrounded = Physics2D.CircleCast(new Vector2(groundSensor.position.x, groundSensor.position.y), 0.1f, Vector2.zero, 0, LayerMask.GetMask("Middleground"));
     }
 }
