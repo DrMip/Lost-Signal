@@ -8,6 +8,7 @@ public class JetScript : MonoBehaviour
     PlayerBehavior pb;
     Rigidbody2D rb;
     PlayerMovement plm;
+    [SerializeField] BarFuncs bar;
     //private float JetStrength;
     //Variables
     bool jetPressed;
@@ -21,6 +22,8 @@ public class JetScript : MonoBehaviour
         plm = GetComponent<PlayerMovement>();
         //JetStrength = pb.JetPackStrength;
         pb.JetTimeCounter = pb.JetTime;
+        //jet max value
+        bar.SetMaxJet(pb.JetTime);
     }
 
     // Update is called once per frame
@@ -52,6 +55,7 @@ public class JetScript : MonoBehaviour
             rb.velocity = Vector2.up*2;
         }
         lastJetPressed = jetPressed;
+        bar.SetJet(pb.JetTimeCounter);
 
 
     }

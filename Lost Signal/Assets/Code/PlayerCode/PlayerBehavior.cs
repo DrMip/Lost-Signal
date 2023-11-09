@@ -9,13 +9,13 @@ public class PlayerBehavior : MonoBehaviour
 
     //Health
     [Header("Health")]
-    public float MaxHealth;
-    //float health;
+    public int MaxHealth;
+    public int health;
     //bool dead = false;
     //wrath
     [Header("Wrath")]
-    public float MaxWrath;
-    //float wrath;
+    public int MaxWrath;
+    public int wrath;
     [Header("X,Y movements")]
     public float MovementSpeed;
 
