@@ -57,7 +57,6 @@ public class AnimationSwitcher : MonoBehaviour
         }
         else if(pm.isGrounded)
         {
-            Debug.Log(Mathf.Abs(rb.velocity.x));
             if(sp.pressedShoot)
             {
                 if(Mathf.Abs(pm.movement) > 0.1f)

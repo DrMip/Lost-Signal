@@ -15,8 +15,6 @@ public class ShootingPlayer : MonoBehaviour
     Animator animPlayer;
     //shot prefab
     public GameObject shotPrefab;
-    //shot object
-    //private GameObject shot;
     //layercast
     private LayerMask environment;
     private LayerMask enemy;
@@ -25,13 +23,7 @@ public class ShootingPlayer : MonoBehaviour
     [SerializeField] string ExplodeAnimWall = "";
     [SerializeField] string ExplodeAnimEnemy = "";
     //shooting variables
-    //private float shotTime;
-    //private float shotSpeed;
-    //private float shotDecayTime;
-    //bool isShotRight;
     public bool pressedShoot;
-    //bool hit;
-    //float Xdirection;
     //temp variables
     [SerializeField] float ShotDistance;
     [SerializeField] float XDisfromCenter = 0.1f;
@@ -46,11 +38,6 @@ public class ShootingPlayer : MonoBehaviour
     {
         pb = GetComponent<PlayerBehavior>();
         animPlayer = GetComponent<Animator>();
-
-        //shotTime = pb.ShotTime;
-        //shotSpeed = pb.ShotSpeed;
-        //shotDecayTime = pb.ShotDecayTime;
-
         //set layers
         environment = LayerMask.GetMask("Middleground");
         enemy = LayerMask.GetMask("Enemies");
