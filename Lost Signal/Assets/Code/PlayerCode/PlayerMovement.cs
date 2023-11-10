@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     bool isStuckOnRightWall;
     //variables for movement x,y 
     //private float movementSpeed;
-    float movement;
+    public float movement;
     bool lookingRight = true;
     //variables for jumping
     //private float jumpStrength;
@@ -80,8 +80,6 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position += new Vector3(movement*pb.MovementSpeed* 0.1f , 0, 0);
         }
-        if(jmp.Jump|| jetting)
-            Debug.Log(jmp.Jump + " " + jetting);
         //if jump and not jetting
         if(jmp.Jump && !jetting)
         {

@@ -5165,12 +5165,14 @@ GameObject:
   - component: {fileID: 1171915301}
   - component: {fileID: 1171915312}
   - component: {fileID: 1171915306}
+  - component: {fileID: 1171915315}
   - component: {fileID: 1171915300}
   - component: {fileID: 1171915307}
   - component: {fileID: 1171915311}
   - component: {fileID: 1171915308}
   - component: {fileID: 1171915310}
   - component: {fileID: 1171915313}
+  - component: {fileID: 1171915314}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -5193,6 +5195,7 @@ MonoBehaviour:
   groundSensor: {fileID: 1095454914}
   isGrounded: 0
   wasGrounded: 0
+  movement: 0
 --- !u!58 &1171915301
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5446,6 +5449,8 @@ MonoBehaviour:
   JetTime: 1
   JetTimeCounter: 0
   JetRecoverRatio: 0.5
+  DashStrength: 1.5
+  DashDuration: 0.2
 --- !u!114 &1171915310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5462,6 +5467,7 @@ MonoBehaviour:
   ExplodeAnimTimesUp: Hit-1 Animation
   ExplodeAnimWall: Hit-2 Animation
   ExplodeAnimEnemy: Hit-3 Animation
+  pressedShoot: 0
   ShotDistance: 0.1
   XDisfromCenter: 0.3
 --- !u!114 &1171915311
@@ -5525,6 +5531,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 875743257}
+--- !u!114 &1171915314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171915299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b38b4dd614701429f8500195b19a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDashing: 0
+--- !u!114 &1171915315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171915299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cecb428e1920ea468a17a33ff1ebe0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1207030464
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,6 +33,9 @@ public class PlayerBehavior : MonoBehaviour
     public float JetTime;
     public float JetTimeCounter;
     public float JetRecoverRatio = 0.5f;
+    [Header("Dash")]
+    public float DashStrength;
+    public float DashDuration;
 
 
 

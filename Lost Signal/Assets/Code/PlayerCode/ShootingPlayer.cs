@@ -29,7 +29,7 @@ public class ShootingPlayer : MonoBehaviour
     //private float shotSpeed;
     //private float shotDecayTime;
     //bool isShotRight;
-    bool pressedShoot;
+    public bool pressedShoot;
     //bool hit;
     //float Xdirection;
     //temp variables
@@ -65,7 +65,7 @@ public class ShootingPlayer : MonoBehaviour
         if(Input.GetButtonDown("Fire1"))
         {
             pressedShoot = true;
-            animPlayer.SetBool("Shooting",true);
+            //animPlayer.SetBool("Shooting",true);
         }
         //if didnt shot right then fix direction of shoot 
         for(int i = 0; i < shots.Count; i++)
@@ -95,7 +95,7 @@ public class ShootingPlayer : MonoBehaviour
         {
             shotTimeCounter = 0;
             Shoot();
-            animPlayer.SetBool("Shooting", false);
+            //animPlayer.SetBool("Shooting", false);
             pressedShoot = false;
         }
         for(int i = 0; i < shots.Count; i++)
