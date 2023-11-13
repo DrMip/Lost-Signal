@@ -12,7 +12,8 @@ public class Parallax : MonoBehaviour
     bool doParallax;
     //serialized
     [SerializeField] float parallaxEffect;
-    [SerializeField] float pullback;
+    [SerializeField] float pullbackRight;
+    [SerializeField] float pullbackLeft;
     float pullbackValue;
 
 
@@ -27,7 +28,8 @@ public class Parallax : MonoBehaviour
         //Debug.Log("entered");
         startpos = player.transform.position.x;
         doParallax = true;
-        pullbackValue = (player.transform.localScale.x > 0) ? pullback : 2*pullback;
+        pullbackValue = (player.transform.localScale.x > 0) ? pullbackLeft: pullbackRight;
+        Debug.Log(pullbackValue);
 
     }
     // Update is called once per frame

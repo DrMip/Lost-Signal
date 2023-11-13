@@ -133,10 +133,10 @@ AnimatorStateMachine:
     m_Position: {x: 160, y: -220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8008153196304098391}
-    m_Position: {x: 110, y: -420, z: 0}
+    m_Position: {x: 160, y: -450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1589291493053205625}
-    m_Position: {x: 145, y: -355, z: 0}
+    m_Position: {x: 370, y: -170, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -144,7 +144,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 390, y: -370, z: 0}
   m_EntryPosition: {x: 390, y: -330, z: 0}
-  m_ExitPosition: {x: 380, y: -160, z: 0}
+  m_ExitPosition: {x: 390, y: -120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 5917591472907939746}
 --- !u!91 &9100000
@@ -155,31 +155,7 @@ AnimatorController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Player
   serializedVersion: 5
-  m_AnimatorParameters:
-  - m_Name: Speed
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: IsJumping
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: IsFalling
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Shooting
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+  m_AnimatorParameters: []
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     bool isStuckOnLeftWall;
     bool isStuckOnRightWall;
     //variables for movement x,y 
+    [NonSerialized] public bool move = true;
     //private float movementSpeed;
     public float movement;
     bool lookingRight = true;
@@ -37,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         ani = GetComponent<Animator>();
         jmp = GetComponent<JumpScript>();
         pb = GetComponent<PlayerBehavior>();
-        transform.position = new Vector3 (-4,0);
+        //transform.position = new Vector3 (-4,0);
 
         //initialize constants
         //movementSpeed = pb.MovementSpeed;
@@ -47,7 +49,10 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckSurroundings();
         //gets input
-        movement = Input.GetAxis("Horizontal");
+        if(move)
+            movement = Input.GetAxis("Horizontal");
+        else
+            movement = 0;
 
         //checks if needs to flip direction
         if(movement > 0 && !lookingRight)
@@ -65,9 +70,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
             jetting = false;
-        
-        HandleAnimations();
-
         
     }
     // Update is called once per frame
@@ -115,35 +117,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 Scale = transform.localScale;
         Scale.x *= -1;
         transform.localScale = Scale;
-    }
-
-    void HandleAnimations()
-    {   
-        //set Speed for running animations
-        ani.SetFloat("Speed", Mathf.Abs(movement));
-        //get check if jumping up or falling
-        if(!isGrounded)
-        {   
-            //if going up then jumping if going down than falling
-            if(rb.velocity.y >= 0)
-            {
-                ani.SetBool("IsJumping", true);
-                ani.SetBool("IsFalling", false);
-            }
-            else if(rb.velocity.y < 0)
-            {
-                ani.SetBool("IsFalling", true);
-                ani.SetBool("IsJumping", false);
-            }
-        }
-        else
-        {
-            //resets jumping animation
-            ani.SetBool("IsFalling", false);
-            ani.SetBool("IsJumping", false);
-        }
-
-
     }
 
 

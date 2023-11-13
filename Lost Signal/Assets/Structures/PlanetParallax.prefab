@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxEffect: 0.65
-  pullback: 22.7
+  pullbackRight: 48
+  pullbackLeft: 18
 --- !u!61 &3734217375147550589
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -80,7 +81,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1211071, y: 0}
+  m_Offset: {x: -0.6352043, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -91,7 +92,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 21.964542, y: 15.155908}
+  m_Size: {x: 30.077675, y: 15.155908}
   m_EdgeRadius: 0
 --- !u!1 &5024306671236761615
 GameObject:
@@ -119,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 5024306671236761615}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.133362, y: 0, z: -10.03}
+  m_LocalPosition: {x: -10.47388, y: 0, z: -10.03}
   m_LocalScale: {x: 2.66, y: 2.66, z: 2.66}
   m_ConstrainProportionsScale: 1
   m_Children: []

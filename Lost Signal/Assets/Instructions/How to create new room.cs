@@ -4,6 +4,5 @@
 //duplicate virtual camera
 //adjust camera and new room's collider as needed
 //create a new state in the cinemachine animator
-//add such state to the Camera state changer code
 //add state in the State driven device
 
