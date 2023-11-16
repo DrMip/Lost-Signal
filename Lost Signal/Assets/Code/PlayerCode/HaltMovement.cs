@@ -34,7 +34,7 @@ public class HaltMovement : MonoBehaviour
     //this method halts all
     public void HaltAll()
     {
-        Debug.Log("halt");
+        //Debug.Log("halt");
         dash.enabled = false;
         jet.enabled = false;
         movement.move = false;
