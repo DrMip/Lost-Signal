@@ -5,23 +5,21 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueScript : MonoBehaviour
+public class DialogueFunc : MonoBehaviour
 {
     //essential Components for PopUp
     [Header("Dialogue Chracteristics")]
     [SerializeField] GameObject dialogueDisplay;
     HaltMovement halt;
-    Animator anim;
-    KeyPopUp key;
     //children of popUp
     [SerializeField] Image avatarRenderer;
     [SerializeField] Text nameObject;
     [SerializeField] Text textObject;
     [SerializeField] GameObject enterObject;
     //variables for functionality
-    bool dialogue_running;
+    [NonSerialized] public bool dialogue_running = false;
 
-
+    int conversationIndex = 1;
 
     //dialogue properties
     [Header("Specifics of Dialogue")]
@@ -39,10 +37,33 @@ public class DialogueScript : MonoBehaviour
     //--------------------
     //Dialogue
     //--------------------
-    List<DialogueEntity> dialogueCharacteristicsList = new List<DialogueEntity>();
-    
+    //conversations list
+    List<List<DialogEntity>> conversationsList = new List<List<DialogEntity>>();
+    //dialogue line structure
+    public struct DialogEntity
+    {
+        //
+        public Sprite avatar;
+        public string speakerName;
+        public Color speakerColor;
+        // All above are corrolated
+        public string Speech;
+
+    }
+
+
+
+
+
+
+    //create conversation hierarchy, 
+    [Serializable] public struct Conversation
+    {
+        public string name;
+        public string[] lines;
+    }
     [Tooltip("# is player, $ is other")]
-    public string[] texts = {};
+    [SerializeField] Conversation[] conversations = new Conversation[1];
 
 
 
@@ -50,67 +71,59 @@ public class DialogueScript : MonoBehaviour
     //create dialogue list
     void Awake()
     {
-        //initialize dialogues
-        foreach(string text in texts)
-        {
-            if(text[0] == '#')
+        //disable dialog
+        dialogueDisplay.SetActive(false);
+        //initialize conversation structure
+        foreach(Conversation conversation in conversations)
+        {  
+            //in each conversation there are multiple lines
+            List<DialogEntity> tempCharaList = new List<DialogEntity>();
+            foreach(string line in conversation.lines)
             {
-                DialogueEntity tempDialogue = ScriptableObject.CreateInstance<DialogueEntity>();
-                string trueText = text.Trim('#');
-                //create
-                tempDialogue.avatar = playerSprite;
-                tempDialogue.speakerName = PlayerName + ':';
-                tempDialogue.speakerColor = PlayerColor;
-                tempDialogue.Speech = trueText;
-                //append
-                dialogueCharacteristicsList.Add(tempDialogue);
+                if(line[0] == '#')
+                {
+                    DialogEntity tempDialogue = new DialogEntity();
+                    string trueText = line.Trim('#');
+                    //create
+                    tempDialogue.avatar = playerSprite;
+                    tempDialogue.speakerName = PlayerName + ':';
+                    tempDialogue.speakerColor = PlayerColor;
+                    tempDialogue.Speech = trueText;
+                    //append
+                    tempCharaList.Add(tempDialogue);
+                }
+                else if(line[0] == '$')
+                {
+                    DialogEntity tempDialogue = new DialogEntity();
+                    string trueText = line.Trim('$');
+                    //create
+                    tempDialogue.avatar = OtherSprite;
+                    tempDialogue.speakerName = OtherName + ':';
+                    tempDialogue.speakerColor = OtherColor;
+                    tempDialogue.Speech = trueText;
+                    //append
+                    tempCharaList.Add(tempDialogue);
+                }
+                else
+                {
+                    Debug.Log("forgot # or $ in dialogue");
+                }
             }
-            else if(text[0] == '$')
-            {
-                DialogueEntity tempDialogue = ScriptableObject.CreateInstance<DialogueEntity>();
-                string trueText = text.Trim('$');
-                //create
-                tempDialogue.avatar = OtherSprite;
-                tempDialogue.speakerName = OtherName + ':';
-                tempDialogue.speakerColor = OtherColor;
-                tempDialogue.Speech = trueText;
-                //append
-                dialogueCharacteristicsList.Add(tempDialogue);
-            }
-            else
-            {
-                Debug.Log("forgot # or $ in dialogue");
-            }
+            conversationsList.Add(tempCharaList);
         }
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        dialogueDisplay.SetActive(false);
         halt = GameObject.Find("Player").GetComponent<HaltMovement>();
-        anim = GameObject.Find("Player").GetComponent<Animator>();
-        key = GetComponent<KeyPopUp>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //get if key pressed
-        if(key.keyPressed && !dialogue_running)
-        {
-            key.keyPressed = false;
-            StartCoroutine(DialogueLoop());
-            anim.Play("Player_Idle");
-            halt.HaltAll();
-            
-        }
-    }
-    IEnumerator DialogueLoop()
+    public IEnumerator DialogueLoop()
     {
         dialogue_running = true;
         dialogueDisplay.SetActive(true);
         //dialogue loop
-        foreach(DialogueEntity line in dialogueCharacteristicsList)
+        foreach(DialogEntity line in conversationsList[conversationIndex-1])
         {
             //clear
             textObject.text = "";
@@ -149,7 +162,11 @@ public class DialogueScript : MonoBehaviour
             //when hit enter does loop again
 
         }
-        
+        //Continue to next conversation
+        if(conversationIndex + 1 <= conversationsList.Count)
+        {
+            conversationIndex ++;
+        }
         //when finishes dialogue disappear and continue movement
         dialogueDisplay.SetActive(false);
         halt.ResumeAll();

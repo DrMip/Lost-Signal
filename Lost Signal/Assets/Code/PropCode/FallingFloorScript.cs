@@ -40,9 +40,10 @@ public class FallingFloorScript : MonoBehaviour
     IEnumerator Collapse()
     {
         cr_running = true;
-        anim.Play("Player_Idle");
+        
         while(shakeTimeCounter < ShakeTime)
         {
+            anim.Play("Player_Idle");
             floor.transform.position = new Vector3(initialPos.x + Random.Range(0, shakeLen), initialPos.y + Random.Range(0, shakeLen), initialPos.z + Random.Range(0, shakeLen));
             //Debug.Log(shakeTimeCounter);
             shakeTimeCounter += Time.deltaTime;

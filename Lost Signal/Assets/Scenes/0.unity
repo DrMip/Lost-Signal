@@ -229,7 +229,7 @@ Transform:
   m_GameObject: {fileID: 36725510}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 103.35852, y: 6.4535213, z: -6.814716}
+  m_LocalPosition: {x: 100.05852, y: 6.853521, z: -6.814716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1002,8 +1002,8 @@ GameObject:
   - component: {fileID: 222193628}
   - component: {fileID: 222193629}
   - component: {fileID: 222193630}
+  - component: {fileID: 222193634}
   - component: {fileID: 222193632}
-  - component: {fileID: 222193633}
   - component: {fileID: 222193631}
   m_Layer: 0
   m_Name: console
@@ -1161,14 +1161,20 @@ MonoBehaviour:
   OtherName: Gangster
   playerSprite: {fileID: 21300000, guid: d5e5f3b90a480054697977dec6bf48a2, type: 3}
   OtherSprite: {fileID: 21300000, guid: a41c96120a84e9b4fb17c33103419204, type: 3}
-  texts:
-  - '#hey Houston'
-  - $sup dude
-  - '#I am about to die'
-  - $nice
-  - $Good day fam
-  - '#thanks'
---- !u!114 &222193633
+  conversations:
+  - name: Conversation 1
+    lines:
+    - '#hey houston, is this working'
+    - $it seems like it is working
+    - '#nice, talk to you later'
+    - $bye fam
+  - name: Conversation 2
+    lines:
+    - '#this is the second time i have talked to you today'
+    - $last time was short
+    - '#this time will be as well'
+    - $k dude
+--- !u!114 &222193634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1177,7 +1183,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 222193627}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6cd5800bc78cd4d9f2ae4a01a08f10, type: 3}
+  m_Script: {fileID: 11500000, guid: 292fbc77bb462b44dad220653f0c6a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &243501377
@@ -2082,7 +2088,7 @@ Transform:
   m_GameObject: {fileID: 468278599}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 103.340004, y: 4.0535207, z: -6.814716}
+  m_LocalPosition: {x: 100.240005, y: 4.4535203, z: -6.814716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12499,7 +12505,7 @@ Transform:
   m_GameObject: {fileID: 1151440679}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 103.35852, y: 6.4535213, z: -6.814716}
+  m_LocalPosition: {x: 100.25852, y: 6.853521, z: -6.814716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12587,7 +12593,7 @@ Transform:
   m_GameObject: {fileID: 1157428349}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 103.340004, y: 9.333521, z: -6.814716}
+  m_LocalPosition: {x: 100.240005, y: 9.7335205, z: -6.814716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12739,7 +12745,7 @@ GameObject:
   - component: {fileID: 1171915304}
   - component: {fileID: 1171915309}
   - component: {fileID: 1171915303}
-  - component: {fileID: 1171915302}
+  - component: {fileID: 1171915317}
   - component: {fileID: 1171915301}
   - component: {fileID: 1171915312}
   - component: {fileID: 1171915306}
@@ -12807,54 +12813,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0050963643, y: -0.07879686}
+  m_Offset: {x: 0.011898041, y: -0.125}
   serializedVersion: 2
-  m_Radius: 0.11661446
---- !u!61 &1171915302
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171915299}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 66e3ba7cda7555f4f80c3b4cd72e1c32, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0051017404, y: 0.00491637}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.38}
-    newSize: {x: 0.32, y: 0.38}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.22901562, y: 0.28847247}
-  m_EdgeRadius: 0
+  m_Radius: 0.06711654
 --- !u!50 &1171915303
 Rigidbody2D:
   serializedVersion: 4
@@ -12943,7 +12904,7 @@ Transform:
   m_GameObject: {fileID: 1171915299}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 118.9, y: 12.3, z: 0}
+  m_LocalPosition: {x: 115.8, y: 12.7, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13091,9 +13052,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0061742547, y: 0.10993784}
+  m_Offset: {x: 0.010773468, y: 0.05}
   serializedVersion: 2
-  m_Radius: 0.052605916
+  m_Radius: 0.065251924
 --- !u!114 &1171915313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13144,6 +13105,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b54b6c51b236e478ce4947efb9dab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &1171915317
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171915299}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0103921, y: -0.040083796}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.38}
+    newSize: {x: 0.32, y: 0.38}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.13296051, y: 0.17678604}
+  m_EdgeRadius: 0
 --- !u!1 &1207030464
 GameObject:
   m_ObjectHideFlags: 0
@@ -13246,7 +13252,7 @@ Transform:
   m_GameObject: {fileID: 1221380212}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 105.58, y: 12.033524, z: -6.814716}
+  m_LocalPosition: {x: 102.48, y: 12.433523, z: -6.814716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18946,6 +18952,7 @@ GameObject:
   - component: {fileID: 7883256027816024773}
   - component: {fileID: 7883256027816024772}
   - component: {fileID: 7883256027816024774}
+  - component: {fileID: 7883256027816024775}
   m_Layer: 0
   m_Name: Security Cams
   m_TagString: Untagged
@@ -19102,7 +19109,7 @@ Transform:
   m_GameObject: {fileID: 3226558990447215791}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 103.340004, y: 7.2535205, z: -6.814716}
+  m_LocalPosition: {x: 100.240005, y: 7.65352, z: -6.814716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19515,7 +19522,7 @@ Transform:
   m_GameObject: {fileID: 5283311318385461833}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 103.340004, y: 6.4535213, z: -6.814716}
+  m_LocalPosition: {x: 100.240005, y: 6.853521, z: -6.814716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19827,6 +19834,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   securityCamsImage: {fileID: 1981790982}
+--- !u!114 &7883256027816024775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565438909258910033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d41a793a7118c47a181824aa5efcc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueDisplay: {fileID: 1268319386}
+  avatarRenderer: {fileID: 361406065}
+  nameObject: {fileID: 1157522299}
+  textObject: {fileID: 16013030}
+  enterObject: {fileID: 509243820}
+  PlayerColor: {r: 0.83921576, g: 0.8313726, b: 0.18039216, a: 1}
+  OtherColor: {r: 0, g: 0, b: 0, a: 0}
+  PlayerName: Budy
+  OtherName: null
+  playerSprite: {fileID: 21300000, guid: d5e5f3b90a480054697977dec6bf48a2, type: 3}
+  OtherSprite: {fileID: 21300000, guid: d5e5f3b90a480054697977dec6bf48a2, type: 3}
+  conversations:
+  - name: Conversation 1
+    lines:
+    - '#Dang it'
+    - '#Another Alien Invasion'
+    - '#Better tell Ground Control '
 --- !u!4 &8399185291402430272
 Transform:
   m_ObjectHideFlags: 0
