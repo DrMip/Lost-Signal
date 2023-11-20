@@ -34,12 +34,11 @@ public class HaltMovement : MonoBehaviour
     //this method halts all
     public void HaltAll()
     {
-        //Debug.Log("halt");
         dash.enabled = false;
         jet.enabled = false;
         movement.move = false;
         health.enabled = false;
-        shoot.enabled = false;
+        shoot.canShoot = false;
         jump.enabled = false;
     }
     public void ResumeAll()
@@ -48,54 +47,55 @@ public class HaltMovement : MonoBehaviour
         jet.enabled = true;
         movement.move = true;
         health.enabled = true;
-        shoot.enabled = true;
+        shoot.canShoot = true;
         jump.enabled = true;
     }
-    public void HaltSpecific(int num)
+    public void HaltSpecific(Comps num)
     {
-        switch(num)
+        Debug.Log((int)num);
+        switch((int)num)
         {
-            case 1:
+            case 0:
                 dash.enabled = false;
                 break;
-            case 2:
+            case 1:
                 jet.enabled = false;
                 break;
-            case 3:
+            case 2:
                 movement.move = false;
                 break;
-            case 4:
+            case 3:
                 health.enabled = false;
                 break;
-            case 5:
-                shoot.enabled = false;
+            case 4:
+                shoot.canShoot = false;
                 break;
-            case 6:
+            case 5:
                 jump.enabled = false;
                 break;
         }
     }
-    public void ResumeSpecific(int num)
+    public void ResumeSpecific(Comps num)
     {
-        switch(num)
+        switch((int)num)
         {
-            case 1:
+            case 0:
                 dash.enabled = true;
                 break;
-            case 2:
+            case 1:
                 jet.enabled = true;
                 break;
-            case 3:
+            case 2:
                 movement.move = true;
                 break;
-            case 4:
+            case 3:
                 health.enabled = true;
                 break;
-            case 5:
-                shoot.enabled = true;
+            case 4:
+                shoot.canShoot = true;
                 break;
-            case 6:
-                jump.enabled = false;
+            case 5:
+                jump.enabled = true;
                 break;
         }
     }

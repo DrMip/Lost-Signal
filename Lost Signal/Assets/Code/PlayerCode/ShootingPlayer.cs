@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,6 @@ public class ShootingPlayer : MonoBehaviour
     //other components and refrences
     PlayerBehavior pb;
     Animator animShot;
-    Animator animPlayer;
     //shot prefab
     public GameObject shotPrefab;
     //layercast
@@ -23,7 +23,8 @@ public class ShootingPlayer : MonoBehaviour
     [SerializeField] string ExplodeAnimWall = "";
     [SerializeField] string ExplodeAnimEnemy = "";
     //shooting variables
-    public bool pressedShoot;
+    [NonSerialized] public bool pressedShoot;
+    [NonSerialized] public bool canShoot = true;
     //temp variables
     [SerializeField] float ShotDistance;
     [SerializeField] float XDisfromCenter = 0.1f;
@@ -37,7 +38,6 @@ public class ShootingPlayer : MonoBehaviour
     void Start()
     {
         pb = GetComponent<PlayerBehavior>();
-        animPlayer = GetComponent<Animator>();
         //set layers
         environment = LayerMask.GetMask("Middleground");
         enemy = LayerMask.GetMask("Enemies");
@@ -52,7 +52,6 @@ public class ShootingPlayer : MonoBehaviour
         if(Input.GetButtonDown("Fire1"))
         {
             pressedShoot = true;
-            //animPlayer.SetBool("Shooting",true);
         }
         //if didnt shot right then fix direction of shoot 
         for(int i = 0; i < shots.Count; i++)
@@ -74,17 +73,29 @@ public class ShootingPlayer : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(shotTimeCounter < pb.ShotTime && pressedShoot)
+        if(pressedShoot)
         {
-            shotTimeCounter += Time.deltaTime;
+            //run shot timer
+            if(shotTimeCounter < pb.ShotTime)
+            {
+                shotTimeCounter += Time.deltaTime;
+            }
+            //if cant shoot than cancel shoot
+            else if(!canShoot)
+            {
+                pressedShoot = false;
+                shotTimeCounter = 0;
+            }
+            //if waited to shoot and can shoot, shoot
+            else
+            {
+                pressedShoot = false;
+                shotTimeCounter = 0;
+                Shoot();
+                
+            }
         }
-        else if(pressedShoot)
-        {
-            shotTimeCounter = 0;
-            Shoot();
-            //animPlayer.SetBool("Shooting", false);
-            pressedShoot = false;
-        }
+
         for(int i = 0; i < shots.Count; i++)
         {
             if(!shots[i].hit)
