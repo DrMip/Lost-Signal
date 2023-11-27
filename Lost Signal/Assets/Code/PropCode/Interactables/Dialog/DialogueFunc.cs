@@ -16,6 +16,10 @@ public class DialogueFunc : MonoBehaviour
     [SerializeField] Text nameObject;
     [SerializeField] Text textObject;
     [SerializeField] GameObject enterObject;
+    [SerializeField] Text SkipText;
+    //skip variables
+    float skipSpeed = 1f;
+    float skipOpaqueCounter = 0;
     //variables for functionality
     [NonSerialized] public bool dialogue_running = false;
 
@@ -29,7 +33,6 @@ public class DialogueFunc : MonoBehaviour
     [SerializeField] string OtherName;
     [SerializeField] Sprite playerSprite;
     [SerializeField] Sprite OtherSprite;
-    
     
 
 
@@ -52,10 +55,6 @@ public class DialogueFunc : MonoBehaviour
     }
 
 
-
-
-
-
     //create conversation hierarchy, 
     [Serializable] public struct Conversation
     {
@@ -71,6 +70,10 @@ public class DialogueFunc : MonoBehaviour
     //create dialogue list
     void Awake()
     {
+        //make skip transparent
+        SkipText.gameObject.SetActive(true);
+        SkipText.color = new Color(SkipText.color.r, SkipText.color.g, SkipText.color.b, 0);
+
         //disable dialog
         dialogueDisplay.SetActive(false);
         //initialize conversation structure
@@ -112,6 +115,44 @@ public class DialogueFunc : MonoBehaviour
             conversationsList.Add(tempCharaList);
         }
 
+    }
+    //skiping
+    private void Update() 
+    {
+        if(dialogue_running)
+        {
+            //run the counter
+            if(Input.GetKey(KeyCode.Return))
+            {
+                //increase counter only until 1
+                if(skipOpaqueCounter <= 1.2f)
+                {
+                    skipOpaqueCounter += skipSpeed * Time.deltaTime;
+                }
+                //show opacity after a fifth of the way
+                if(skipOpaqueCounter > 0.2f)
+                {
+                    SkipText.color = new Color(SkipText.color.r, SkipText.color.g, SkipText.color.b, skipOpaqueCounter - 0.2f);
+                }
+                //end dialogue
+                if(skipOpaqueCounter > 1.2f)
+                {
+                    SkipText.color = new Color(SkipText.color.r, SkipText.color.g, SkipText.color.b, 1);
+                    Invoke("EndDialogue", 0.2f);
+                    SkipText.color = new Color(SkipText.color.r, SkipText.color.g, SkipText.color.b, 0);
+                }
+            }
+            else
+            {
+                skipOpaqueCounter = 0;
+                SkipText.color = new Color(SkipText.color.r, SkipText.color.g, SkipText.color.b, 0);
+            }
+
+        }
+        else if(skipOpaqueCounter != 0)
+        {
+            skipOpaqueCounter = 0;
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -162,6 +203,11 @@ public class DialogueFunc : MonoBehaviour
             //when hit enter does loop again
 
         }
+        //end dialogue
+        EndDialogue();
+    }
+    void EndDialogue()
+    {
         //Continue to next conversation
         if(conversationIndex + 1 <= conversationsList.Count)
         {

@@ -105,11 +105,6 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log(isStuckOnRightWall);
     }
 
-    void HandleMovements()
-    {
-
-    }
-
     void Flip()
     {
         lookingRight = !lookingRight;

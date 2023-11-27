@@ -15,8 +15,8 @@ TagManager:
   - Foreground
   - Player
   - Middleground
+  - Lava
   - Background
-  - 
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2410942207
+    locked: 0
+  - name: Lava
+    uniqueID: 596666927
     locked: 0
   - name: Middleground
     uniqueID: 21753743

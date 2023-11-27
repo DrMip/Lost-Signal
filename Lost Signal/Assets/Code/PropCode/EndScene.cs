@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndScene : MonoBehaviour
 {
@@ -16,6 +18,11 @@ public class EndScene : MonoBehaviour
         if(other.gameObject.name == "Player")
         {
             image.SetActive(true);
+            Invoke("ChangeScene", 3f);
         }
+    }
+    void ChangeScene()
+    {
+        SceneManager.LoadScene(1);
     }
 }

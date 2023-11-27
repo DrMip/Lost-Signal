@@ -9,7 +9,7 @@ public class HaltMovement : MonoBehaviour
     Dash dash;
     JetScript jet;
     PlayerMovement movement;
-    PlayerBarsScript health;
+    PlayerHealthAndWrath health;
     ShootingPlayer shoot;
     JumpScript jump;
     public enum Comps
@@ -27,7 +27,7 @@ public class HaltMovement : MonoBehaviour
         dash = GetComponent<Dash>();
         jet = GetComponent<JetScript>();
         movement = GetComponent<PlayerMovement>();
-        health = GetComponent<PlayerBarsScript>();
+        health = GetComponent<PlayerHealthAndWrath>();
         shoot = GetComponent<ShootingPlayer>();
         jump = GetComponent<JumpScript>();
     }

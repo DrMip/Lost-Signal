@@ -59,9 +59,9 @@ public class BarFuncs : MonoBehaviour
     public void SetMaxWrath(int MaxWrath)
     {
         wrathslider.maxValue = MaxWrath;
-        wrathslider.value = MaxWrath;
+        wrathslider.value = 0;
         backgroundWrathSlider.maxValue = MaxWrath;
-        backgroundWrathSlider.value = MaxWrath;
+        backgroundWrathSlider.value = 0;
     }
     public void SetWrath(int wrath)
     {
