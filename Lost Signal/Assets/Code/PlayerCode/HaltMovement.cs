@@ -52,7 +52,6 @@ public class HaltMovement : MonoBehaviour
     }
     public void HaltSpecific(Comps num)
     {
-        Debug.Log((int)num);
         switch((int)num)
         {
             case 0:

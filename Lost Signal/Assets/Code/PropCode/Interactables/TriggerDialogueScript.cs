@@ -8,7 +8,13 @@ public class TriggerDialogueScript : MonoBehaviour
     DialogueFunc dialogueFunc;
     HaltMovement halt;
     Animator anim;
-    bool entered = false;
+    bool doDialogue = true;
+    bool triggered = false;
+    [SerializeField] float delayBetweenDialogues = 1f;
+    //makes restarting dialogue only happens once
+    bool restartDialogue = true;
+    //conversation counter
+    private int convCounter;
 
     private void Awake() 
     {
@@ -16,23 +22,52 @@ public class TriggerDialogueScript : MonoBehaviour
         halt = GameObject.Find("Player").GetComponent<HaltMovement>();
         anim = GameObject.Find("Player").GetComponent<Animator>();
     }
+    void Start()
+    {
+        convCounter = dialogueFunc.conversationNum;
+    }
+    void Update()
+    {
+        if(triggered)
+        {
+            if(!dialogueFunc.dialogue_running)
+            {
+                //do dialogue
+                if(doDialogue)
+                {
+                    doDialogue = false;
+                    StartCoroutine(dialogueFunc.DialogueLoop());
 
+                    anim.Play("Player_Idle");
+                    halt.HaltAll();
+                }
+                //register as finished only if we have multiple conversations
+                else if(multipleConversations && restartDialogue && convCounter > 1)
+                {
+                    restartDialogue = false;
+                    Debug.Log("restart conversation");
+                    Invoke("DelayStart", delayBetweenDialogues);
+                    halt.HaltAll();
+                }
+            }
+            
+        }
+        //Debug.Log(convCounter);
+    }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(!entered)
+        if(other.gameObject.name == "Player")
         {
-            Debug.Log("dialogue");
-            entered = true;
-            
-            StartCoroutine(dialogueFunc.DialogueLoop());
-
-            anim.Play("Player_Idle");
-            halt.HaltAll();
-
-            //register as finished onlly if we have multiple conversations
-            if(multipleConversations)
-                entered = false;
+            triggered = true;
         }
     }
+    void DelayStart()
+    {
+        doDialogue = true;
+        restartDialogue = true;
+        convCounter -= 1;
+        //Debug.Log(convCounter);
+    }
+    
 
 }

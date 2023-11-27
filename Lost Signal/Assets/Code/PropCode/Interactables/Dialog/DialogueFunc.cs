@@ -64,6 +64,8 @@ public class DialogueFunc : MonoBehaviour
     [Tooltip("# is player, $ is other")]
     [SerializeField] Conversation[] conversations = new Conversation[1];
 
+    [NonSerialized] public int conversationNum;
+
 
 
 
@@ -73,6 +75,8 @@ public class DialogueFunc : MonoBehaviour
         //make skip transparent
         SkipText.gameObject.SetActive(true);
         SkipText.color = new Color(SkipText.color.r, SkipText.color.g, SkipText.color.b, 0);
+        //get conversation number
+        conversationNum = conversations.Length;
 
         //disable dialog
         dialogueDisplay.SetActive(false);
