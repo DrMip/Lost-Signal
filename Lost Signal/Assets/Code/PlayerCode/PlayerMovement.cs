@@ -17,14 +17,14 @@ public class PlayerMovement : MonoBehaviour
     //other components
     [SerializeField] private Transform groundSensor;
     //variables for checking surroundings
-    public bool isGrounded;
-    public bool wasGrounded;
+    [NonSerialized] public bool isGrounded;
+    [NonSerialized] public bool wasGrounded;
     bool isStuckOnLeftWall;
     bool isStuckOnRightWall;
     //variables for movement x,y 
     [NonSerialized] public bool move = true;
     //private float movementSpeed;
-    public float movement;
+    [NonSerialized] public float movement;
     bool lookingRight = true;
     //variables for jumping
     //private float jumpStrength;

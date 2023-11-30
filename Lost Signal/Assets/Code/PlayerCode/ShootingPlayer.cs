@@ -154,13 +154,13 @@ public class ShootingPlayer : MonoBehaviour
             {
                 shot.hit = true;
                 animShot.Play(ExplodeAnimEnemy);
-                //Debug.Log(hit + " 3");
+                Debug.Log("enemy");
             }
             else if(ShotSearchFor(environment,shot))
             {
                 shot.hit = true;
                 animShot.Play(ExplodeAnimWall);
-                //Debug.Log(hit + " 4");
+                Debug.Log("walls");
             }
         }
         else if(!shot.hit)
@@ -168,7 +168,7 @@ public class ShootingPlayer : MonoBehaviour
             shot.shotDecayTimeCounter = 0;
             shot.hit = true;
             animShot.Play(ExplodeAnimTimesUp);
-            //Debug.Log(hit + " 5");
+            Debug.Log("disipated");
 
         }
         //Debug.Log(hit + " 6");

@@ -7,6 +7,7 @@ public class ShowFPS : MonoBehaviour
     private float polling_time = 1f;
     private float time = 0;
     private int framecount;
+    [SerializeField] private bool show = false;
 
     private void Start()
     {
@@ -21,7 +22,7 @@ public class ShowFPS : MonoBehaviour
 
         if(time >= polling_time)
         {
-            //Debug.Log(Mathf.RoundToInt(framecount / time));
+            if(show) Debug.Log(Mathf.RoundToInt(framecount / time));
             time = 0;
             framecount = 0;
             
