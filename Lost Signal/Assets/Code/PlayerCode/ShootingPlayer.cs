@@ -31,7 +31,7 @@ public class ShootingPlayer : MonoBehaviour
     //counters
     float shotTimeCounter = 0;
     //float shotDecayTimeCounter = 0;
-
+    public bool temp;
     //other variables
     float Xscale;
     // Start is called before the first frame update
@@ -104,6 +104,11 @@ public class ShootingPlayer : MonoBehaviour
                 shots[i].shotObject.transform.position += new Vector3(shots[i].Xdirection*pb.ShotSpeed* 0.1f , 0, 0);
             }
         }
+        if(temp)
+        {
+            Shoot();
+            temp = false;
+        }
 
     }
 
@@ -154,13 +159,13 @@ public class ShootingPlayer : MonoBehaviour
             {
                 shot.hit = true;
                 animShot.Play(ExplodeAnimEnemy);
-                Debug.Log("enemy");
+                //Debug.Log("enemy");
             }
             else if(ShotSearchFor(environment,shot))
             {
                 shot.hit = true;
                 animShot.Play(ExplodeAnimWall);
-                Debug.Log("walls");
+                //Debug.Log("walls");
             }
         }
         else if(!shot.hit)
@@ -168,7 +173,7 @@ public class ShootingPlayer : MonoBehaviour
             shot.shotDecayTimeCounter = 0;
             shot.hit = true;
             animShot.Play(ExplodeAnimTimesUp);
-            Debug.Log("disipated");
+            //Debug.Log("disipated");
 
         }
         //Debug.Log(hit + " 6");

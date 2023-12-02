@@ -7,6 +7,8 @@ public class EnemyHealth : MonoBehaviour
 {
     EnemyBehavior eb;
     GameObject player;
+    SpriteRenderer rndr;
+    EnemyAI ai;
     //handling attacks happen once
     bool hasDashAttacked = false;
     bool hasShotAttacked = false;
@@ -14,13 +16,21 @@ public class EnemyHealth : MonoBehaviour
     //know if hurt
     [NonSerialized] public bool Hurt;
     int lastHealth;
-
+    //death anim
+    Color newColor;
+    Color defualtColor;
+    bool deathAnimRunning;
     [SerializeField] BoxCollider2D standardCollider;
     // Start is called before the first frame update
     void Start()
     {
         eb = GetComponent<EnemyBehavior>();
+        rndr = GetComponent<SpriteRenderer>();
+        ai = GetComponent<EnemyAI>();
+        defualtColor = rndr.color;
         player = GameObject.FindWithTag("Player");
+
+        ai.enabled = true;
 
         eb.health = eb.MaxHealth;
     }
@@ -32,7 +42,8 @@ public class EnemyHealth : MonoBehaviour
         {
             eb.health = 0;
             //kill(for now only destroy)
-            Destroy(gameObject);
+            if(!deathAnimRunning)
+                StartCoroutine(DeathAnim());
         }
         //handle knowing when hurt
         if(lastHealth > eb.health)
@@ -51,7 +62,7 @@ public class EnemyHealth : MonoBehaviour
         //if hits dashing player
         if(other.gameObject.CompareTag("Player") && player.GetComponent<Dash>().isDashing && !hasDashAttacked)
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             hasDashAttacked = true;
             standardCollider.enabled = false;
             eb.health -= 50;
@@ -59,6 +70,7 @@ public class EnemyHealth : MonoBehaviour
         else if(other.gameObject.CompareTag("Shot") && !hasShotAttacked)
         {
             hasShotAttacked = true;
+            
             eb.health -= 10;
         }
     }
@@ -73,6 +85,25 @@ public class EnemyHealth : MonoBehaviour
         standardCollider.enabled = true;
         //shot
         hasShotAttacked = false;
+
+    }
+
+    IEnumerator DeathAnim()
+    {
+        ai.enabled = false;
+        deathAnimRunning = true;
+        //blink
+        for(int i = 0; i<2; i++)
+        {
+            //change color
+            rndr.color = newColor;
+            yield return new WaitForSeconds(0.1f);
+            //return to color
+            rndr.color = defualtColor;
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject);
 
     }
 }

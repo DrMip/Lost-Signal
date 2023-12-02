@@ -14,6 +14,8 @@ public class AnimationSkeleton : MonoBehaviour
     //variables
     private string currentState;
     private Color defualtColor;
+    Vector3 lastPos;
+    [SerializeField] float temp;
 
     [SerializeField] private Color newColor;
     [SerializeField] private float ColorDisplayTime;
@@ -36,7 +38,8 @@ public class AnimationSkeleton : MonoBehaviour
 
         //save defualt color
         defualtColor = rndr.color;
-        Debug.Log(defualtColor);
+        //Debug.Log(defualtColor);
+        lastPos = transform.position;
 
 
     }
@@ -69,6 +72,7 @@ public class AnimationSkeleton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(skeletonHealth.Hurt)
         {
             StateChanger(SKELETON_HURT);
@@ -76,8 +80,9 @@ public class AnimationSkeleton : MonoBehaviour
         }
         else
         {
-            StateChanger(SKELETON_IDLE);
+            StateChanger(SKELETON_WALK);
         }
+        lastPos = transform.position;
     }
 
 }
