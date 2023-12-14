@@ -18,6 +18,7 @@ public class PlayerHealthAndWrath : MonoBehaviour
     bool cr_GameOver_running = false;
     Vector3 startpos;
     int lastHealth;
+    int lastWrath;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +48,7 @@ public class PlayerHealthAndWrath : MonoBehaviour
         pb.health = pb.MaxHealth;
         pb.wrath = 0;
         bar.SetWrath(pb.wrath);
+        lastWrath = 0;
 
     }
 
@@ -75,7 +77,8 @@ public class PlayerHealthAndWrath : MonoBehaviour
             StartCoroutine(GameOverScreen());
         }
         //handles what the bars say
-        BarsHandler();
+        HealthHandler();
+        WrathHandler();
     }
     IEnumerator GameOverScreen()
     {
@@ -115,13 +118,24 @@ public class PlayerHealthAndWrath : MonoBehaviour
 
     }
     //handles what the bars show
-    void BarsHandler()
+    void HealthHandler()
     {
+        //health
         //check if needs to be changed
         if(pb.health == lastHealth) return;
         //play animation
         bar.SetHealth(pb.health);
         //remember state
         lastHealth = pb.health;
+    }
+    void WrathHandler()
+    {
+        //wrath
+        //check if needs to be changed
+        if(pb.wrath == lastWrath) return;
+        //play animation
+        bar.SetWrath(pb.wrath);
+        //remember state
+        lastWrath = pb.wrath;
     }
 }

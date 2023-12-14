@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3714173764718807882}
   - component: {fileID: 8770534843713293396}
   - component: {fileID: 4645358173494850732}
+  - component: {fileID: 4616104835234385180}
   - component: {fileID: 3519602233399893336}
   - component: {fileID: 3602514369425004373}
   - component: {fileID: 2860218581226976299}
@@ -106,9 +107,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a680be234cddc41acd16f24f200737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  MaxHealth: 50
   health: 0
-  MovementSpeed: 0
+  DealDamage: 10
+  HitInterval: 0.25
+--- !u!114 &4616104835234385180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138270051621165339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f41c1b7cc428543a7bcd6b08820e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3519602233399893336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2fc36fb20ec084a947bc2824265dff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temp: 0.005
   newColor: {r: 1, g: 0.11698109, b: 0.11698109, a: 1}
   ColorDisplayTime: 0.2
 --- !u!50 &3602514369425004373

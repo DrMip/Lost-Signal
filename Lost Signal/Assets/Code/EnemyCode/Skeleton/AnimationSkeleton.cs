@@ -14,8 +14,6 @@ public class AnimationSkeleton : MonoBehaviour
     //variables
     private string currentState;
     private Color defualtColor;
-    Vector3 lastPos;
-    [SerializeField] float temp;
 
     [SerializeField] private Color newColor;
     [SerializeField] private float ColorDisplayTime;
@@ -39,7 +37,6 @@ public class AnimationSkeleton : MonoBehaviour
         //save defualt color
         defualtColor = rndr.color;
         //Debug.Log(defualtColor);
-        lastPos = transform.position;
 
 
     }
@@ -82,7 +79,6 @@ public class AnimationSkeleton : MonoBehaviour
         {
             StateChanger(SKELETON_WALK);
         }
-        lastPos = transform.position;
     }
 
 }

@@ -8,6 +8,8 @@ public class EnemyBehavior : MonoBehaviour
     [Header("Health")]
     public int MaxHealth;
     public int health;
-    [Header("X,Y movements")]
-    public float MovementSpeed;
+    [Header("Damage")]
+    public int DealDamage;
+    public float HitInterval;
+
 }

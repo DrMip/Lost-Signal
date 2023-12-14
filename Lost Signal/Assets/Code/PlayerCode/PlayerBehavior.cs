@@ -16,6 +16,7 @@ public class PlayerBehavior : MonoBehaviour
     [Header("Wrath")]
     public int MaxWrath;
     public int wrath;
+    public int AddedWrathOnDeath;
     [Header("X,Y movements")]
     public float MovementSpeed;
 
@@ -27,7 +28,10 @@ public class PlayerBehavior : MonoBehaviour
     [Header("Shooting")]
     public float ShotTime;
     public float ShotSpeed = 3;
+    [Tooltip("Used in Animated shot")]
     public float ShotDecayTime = 3;
+    [Tooltip("Used in Raycast shot")]
+    public float shotDis = 10f;
     [Header("Jetpack")]
     public float JetPackStrength;
     public float JetTime;
@@ -37,6 +41,10 @@ public class PlayerBehavior : MonoBehaviour
     public float DashStrength;
     public float DashDuration;
 
+    [Header("AttacksDamage")]
+    public int DashDamage;
+
+    public int ShotDamage;
 
 
 

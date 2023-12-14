@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class AnimationSwitcher : MonoBehaviour
@@ -10,6 +11,7 @@ public class AnimationSwitcher : MonoBehaviour
     PlayerMovement pm;
     ShootingPlayer sp;
     Rigidbody2D rb;
+    RaycastShooting rs;
 
     Dash dash;
     //variables
@@ -29,6 +31,7 @@ public class AnimationSwitcher : MonoBehaviour
         
         pm = GetComponent<PlayerMovement>();
         sp = GetComponent<ShootingPlayer>();
+        rs = GetComponent<RaycastShooting>();
         dash = GetComponent<Dash>();
 
 
@@ -57,7 +60,7 @@ public class AnimationSwitcher : MonoBehaviour
         }
         else if(pm.isGrounded)
         {
-            if(sp.pressedShoot)
+            if(rs.pressedShoot || sp.pressedShoot)
             {
                 if(Mathf.Abs(pm.movement) > 0.1f)
                 {

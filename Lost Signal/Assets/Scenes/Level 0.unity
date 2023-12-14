@@ -12925,6 +12925,7 @@ GameObject:
   - component: {fileID: 1171915313}
   - component: {fileID: 1171915314}
   - component: {fileID: 1171915316}
+  - component: {fileID: 1171915318}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -13139,6 +13140,7 @@ MonoBehaviour:
   health: 0
   MaxWrath: 100
   wrath: 0
+  AddedWrathOnDeath: 0
   MovementSpeed: 1.5
   JumpStrength: 3.5
   DelayJump: 0.2
@@ -13146,6 +13148,7 @@ MonoBehaviour:
   ShotTime: 0.3
   ShotSpeed: 4
   ShotDecayTime: 0.5
+  shotDis: 10
   JetPackStrength: 3.5
   JetTime: 1
   JetTimeCounter: 0
@@ -13159,7 +13162,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171915299}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac812ccfff6c706409e6acfc0b66bbc2, type: 3}
   m_Name: 
@@ -13170,6 +13173,7 @@ MonoBehaviour:
   ExplodeAnimEnemy: Hit-3 Animation
   ShotDistance: 0.1
   XDisfromCenter: 0.3
+  temp: 0
 --- !u!114 &1171915311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13314,6 +13318,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13296051, y: 0.17678604}
   m_EdgeRadius: 0
+--- !u!114 &1171915318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171915299}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d2b32a34bee6e4cb6bcc07a4270dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImpactPrefab: {fileID: 6194083481821379258, guid: f0ce40dc7a3565e4581d7dbf7d771676, type: 3}
+  Tags:
+  - Environment
+  - Enemy
 --- !u!1 &1207030464
 GameObject:
   m_ObjectHideFlags: 0

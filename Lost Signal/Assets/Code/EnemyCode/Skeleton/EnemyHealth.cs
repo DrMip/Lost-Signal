@@ -11,7 +11,6 @@ public class EnemyHealth : MonoBehaviour
     EnemyAI ai;
     //handling attacks happen once
     bool hasDashAttacked = false;
-    bool hasShotAttacked = false;
 
     //know if hurt
     [NonSerialized] public bool Hurt;
@@ -65,14 +64,14 @@ public class EnemyHealth : MonoBehaviour
             //Debug.Log("hit");
             hasDashAttacked = true;
             standardCollider.enabled = false;
-            eb.health -= 50;
+            eb.health -= player.GetComponent<PlayerBehavior>().DashDamage;
         }
-        else if(other.gameObject.CompareTag("Shot") && !hasShotAttacked)
-        {
-            hasShotAttacked = true;
-            
-            eb.health -= 10;
-        }
+        //else if(other.gameObject.CompareTag("Shot") && !hasShotAttacked)
+        //{
+            //hasShotAttacked = true;
+
+            //eb.health -= 10;
+        //}
     }
     private void OnTriggerExit2D(Collider2D other) 
     {
@@ -84,7 +83,7 @@ public class EnemyHealth : MonoBehaviour
         hasDashAttacked = false;
         standardCollider.enabled = true;
         //shot
-        hasShotAttacked = false;
+        //hasShotAttacked = false;
 
     }
 
@@ -103,7 +102,13 @@ public class EnemyHealth : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(0.1f);
+        player.GetComponent<PlayerBehavior>().wrath += player.GetComponent<PlayerBehavior>().AddedWrathOnDeath;
+        Debug.Log("Death");
         Destroy(gameObject);
 
+    }
+    public void EnemyShot()
+    {
+        eb.health -= player.GetComponent<PlayerBehavior>().ShotDamage;
     }
 }
