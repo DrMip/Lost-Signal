@@ -30,7 +30,7 @@ public class DamageScript : MonoBehaviour
     {
         if(doHit)
         {
-            Debug.Log(doHit);
+            //Debug.Log(doHit);
             if(hitTimer < eb.HitInterval)
             {
                 hitTimer += Time.deltaTime;

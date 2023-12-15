@@ -6,8 +6,17 @@ using Unity.Mathematics;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
+
 public class ShootingPlayer : MonoBehaviour
 {
+    public class Shot
+    {
+        public GameObject shotObject;
+        public bool isShotRight;
+        public bool hit;
+        public float Xdirection;
+        public float shotDecayTimeCounter = 0;
+    }
     //shot list
     List<Shot> shots = new List<Shot>();
     //other components and refrences
@@ -57,7 +66,7 @@ public class ShootingPlayer : MonoBehaviour
         for(int i = 0; i < shots.Count; i++)
         {
             Transform trans = shots[i].shotObject.transform;
-            if(!shots[i].isShotRight && shots[i])
+            if(!shots[i].isShotRight)
             {
                 trans.localScale = new Vector3(-Xscale,trans.localScale.y,trans.localScale.z);
             }
@@ -66,7 +75,7 @@ public class ShootingPlayer : MonoBehaviour
                 CheckandEndShot(shots[i]);
                 
         }
-
+        
         
         
 
@@ -118,7 +127,7 @@ public class ShootingPlayer : MonoBehaviour
         float xLocation = transform.localScale.x * ShotDistance;
         Vector3 shotPosition =new Vector3 (transform.position.x + xLocation, transform.position.y, transform.position.z);
         //create object
-        Shot shot = ScriptableObject.CreateInstance<Shot>();
+        Shot shot = new Shot();
         //create the shot
         shot.shotObject = Instantiate(shotPrefab , shotPosition, quaternion.identity);
         shot.shotObject.name = "shot " + (shots.Count + 1);

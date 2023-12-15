@@ -19,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
     Color newColor;
     Color defualtColor;
     bool deathAnimRunning;
+    public bool hitBySpecial;
     [SerializeField] BoxCollider2D standardCollider;
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,12 @@ public class EnemyHealth : MonoBehaviour
             if(!deathAnimRunning)
                 StartCoroutine(DeathAnim());
         }
+
+        //handle hit by Special
+        if(hitBySpecial && !deathAnimRunning)// if it hasn't died because of special then forget it was hit by special
+        {
+            hitBySpecial = false;
+        }
         //handle knowing when hurt
         if(lastHealth > eb.health)
         {
@@ -54,6 +61,7 @@ public class EnemyHealth : MonoBehaviour
             Hurt = false;
         }
         lastHealth = eb.health;
+
     }
     private void OnTriggerStay2D(Collider2D other) 
     {
@@ -102,8 +110,9 @@ public class EnemyHealth : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(0.1f);
-        player.GetComponent<PlayerBehavior>().wrath += player.GetComponent<PlayerBehavior>().AddedWrathOnDeath;
-        Debug.Log("Death");
+        if(!hitBySpecial) //if wasn't hit by special
+            player.GetComponent<PlayerBehavior>().wrath += player.GetComponent<PlayerBehavior>().AddedWrathOnDeath;
+        //Debug.Log("Death");
         Destroy(gameObject);
 
     }
@@ -111,4 +120,5 @@ public class EnemyHealth : MonoBehaviour
     {
         eb.health -= player.GetComponent<PlayerBehavior>().ShotDamage;
     }
+
 }

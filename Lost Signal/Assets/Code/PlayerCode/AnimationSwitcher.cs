@@ -12,10 +12,24 @@ public class AnimationSwitcher : MonoBehaviour
     ShootingPlayer sp;
     Rigidbody2D rb;
     RaycastShooting rs;
-
+    SpecialAttacks sa;
+    JetScript js;
     Dash dash;
     //variables
+    //for animation
     private string currentState;
+
+
+    //particles
+    private enum Action
+    {
+        Running,
+        Jeting
+    }
+    private bool[] ActionState = new bool[2];
+    private bool[] LastActionState = new bool[2];
+    [Tooltip("1 is Running, 2 is Jetting")]
+    [SerializeField] List<ParticleSystem> Particles = new();
     //strings
     const string PLAYER_IDLE = "Player_Idle";
     const string PLAYER_RUN = "Player_Run";
@@ -33,6 +47,8 @@ public class AnimationSwitcher : MonoBehaviour
         sp = GetComponent<ShootingPlayer>();
         rs = GetComponent<RaycastShooting>();
         dash = GetComponent<Dash>();
+        js = GetComponent<JetScript>();
+        sa = GetComponent<SpecialAttacks>();
 
 
     }
@@ -53,8 +69,26 @@ public class AnimationSwitcher : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if(dash.isDashing)
+    {   
+        //make the actionState for running array 0
+        ActionState[(int)Action.Running] = false;
+        //checks if needs to jet
+        if(js.jetting)
+            ActionState[(int)Action.Jeting] = true;
+        else
+            ActionState[(int)Action.Jeting] = false;
+        
+
+
+        if (sa.wrathHeal.isDoingSpecial)
+        {
+            StateChanger(sa.wrathHeal.Animation);
+        }
+        else if(sa.explode.isDoingSpecial)
+        {
+            StateChanger(sa.explode.Animation);
+        }
+        else if(dash.isDashing)
         {
             StateChanger(PLAYER_DASH);
         }
@@ -65,6 +99,7 @@ public class AnimationSwitcher : MonoBehaviour
                 if(Mathf.Abs(pm.movement) > 0.1f)
                 {
                     StateChanger(RUN_AND_GUN);
+                    ActionState[(int)Action.Running] = true; //update the action state of running to true
                 }
                 else
                 {
@@ -77,6 +112,7 @@ public class AnimationSwitcher : MonoBehaviour
                 {
                     //Debug.Log("run");
                     StateChanger(PLAYER_RUN);
+                    ActionState[(int)Action.Running] = true; //update the action state of running to true
                 }
                 else
                 {
@@ -90,13 +126,33 @@ public class AnimationSwitcher : MonoBehaviour
             if(rb.velocity.y > 0)
             {
                 StateChanger(PLAYER_JUMP_UP);
+
             }
             else
             {
                 StateChanger(PLAYER_FALLING_DOWN);
             }
         }
+        Debug.Log(ActionState[(int)Action.Jeting]);
+        //handling particles
+        ParticleHandler((int)Action.Running);
+        ParticleHandler((int)Action.Jeting);
 
 
+    }
+
+    //particles
+    void ParticleHandler(int indexToCheck)
+    {
+        //check if needs to be changed
+        if (ActionState[indexToCheck] == LastActionState[indexToCheck]) return;
+        //play if now wants to run, play
+        if (ActionState[indexToCheck] == true)
+            Particles[indexToCheck].Play();
+        //else stop
+        else
+            Particles[indexToCheck].Stop();
+        //remember state
+        LastActionState[indexToCheck] = ActionState[indexToCheck];
     }
 }

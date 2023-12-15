@@ -13,6 +13,7 @@ public class JetScript : MonoBehaviour
     //Variables
     bool jetPressed;
     bool lastJetPressed;
+    public bool jetting;
 
     // Start is called before the first frame update
     void Start()
@@ -62,10 +63,14 @@ public class JetScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(jetPressed && pb.JetTimeCounter > 0)
+        if (jetPressed && pb.JetTimeCounter > 0)
         {
-            transform.position += new Vector3(0 , pb.JetPackStrength * 0.1f, 0);
+            transform.position += new Vector3(0, pb.JetPackStrength * 0.1f, 0);
+            jetting = true;
+
         }
+        else
+            jetting = false;
     }
 
 }

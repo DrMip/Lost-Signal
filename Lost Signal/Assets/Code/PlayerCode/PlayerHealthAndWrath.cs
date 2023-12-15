@@ -13,6 +13,7 @@ public class PlayerHealthAndWrath : MonoBehaviour
     HaltMovement halt;
     [SerializeField] GameObject GameOver;
     GameObject gameoverEnter;
+    [SerializeField] EnemySpawning enemySpawning;
     Color Entercolor;
     [SerializeField] float opaqueSpeed = 0.05f;
     bool cr_GameOver_running = false;
@@ -56,16 +57,16 @@ public class PlayerHealthAndWrath : MonoBehaviour
     void Update()
     {
 
-        if(Input.GetKeyDown(KeyCode.T))
+/*        if (Input.GetKeyDown(KeyCode.T))
         {
             pb.health -= 5;
         }
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             pb.wrath -= 20;
-        }
+        }*/
         //if feels lava
-        if(Physics2D.CircleCast(new Vector2(transform.position.x, transform.position.y), 0.1f, Vector2.zero, 0, LayerMask.GetMask("Lava")))
+        if (Physics2D.CircleCast(new Vector2(transform.position.x, transform.position.y), 0.1f, Vector2.zero, 0, LayerMask.GetMask("Lava")))
         {
             pb.health = 0;
         }
@@ -107,13 +108,12 @@ public class PlayerHealthAndWrath : MonoBehaviour
         //set health
         pb.health = pb.MaxHealth;
         pb.wrath = 0;
-        bar.SetHealth(pb.health);
-        bar.SetMaxWrath(pb.wrath);
         //reset
         transform.position = startpos;
         gameoverEnter.GetComponent<Text>().color = new Color(Entercolor.r,Entercolor.g,Entercolor.b, 0);
         GameOver.SetActive(false);
         halt.ResumeAll();
+        enemySpawning.SpawnAllEnemies();
         cr_GameOver_running = false;
 
     }
@@ -121,6 +121,8 @@ public class PlayerHealthAndWrath : MonoBehaviour
     void HealthHandler()
     {
         //health
+        //clamp health
+        if(pb.health > pb.MaxHealth) pb.health = pb.MaxHealth;
         //check if needs to be changed
         if(pb.health == lastHealth) return;
         //play animation
@@ -131,6 +133,8 @@ public class PlayerHealthAndWrath : MonoBehaviour
     void WrathHandler()
     {
         //wrath
+        //clamp wrath
+        if(pb.wrath > pb.MaxWrath) pb.wrath = pb.MaxWrath;
         //check if needs to be changed
         if(pb.wrath == lastWrath) return;
         //play animation

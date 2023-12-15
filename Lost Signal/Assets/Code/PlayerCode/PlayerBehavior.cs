@@ -40,6 +40,7 @@ public class PlayerBehavior : MonoBehaviour
     [Header("Dash")]
     public float DashStrength;
     public float DashDuration;
+    public float DashCooldown;
 
     [Header("AttacksDamage")]
     public int DashDamage;

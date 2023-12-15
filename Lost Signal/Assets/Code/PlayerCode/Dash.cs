@@ -15,6 +15,7 @@ public class Dash : MonoBehaviour
     float xdirect;
     bool pressedDash;
     [NonSerialized] public bool isDashing;
+    [NonSerialized] public bool canDash = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +28,11 @@ public class Dash : MonoBehaviour
     void Update()
     {
         //if pressed dash, and not already dashing, say is dashing and get dash direction
-        if(Input.GetButtonDown("Dash") && !isDashing)
+        if(Input.GetButtonDown("Dash") && canDash)
         {
             pressedDash = true;
             xdirect = (transform.localScale.x > 0) ? 1: (-1);
-            isDashing = true;
+            
         }
 
     }
@@ -43,7 +44,6 @@ public class Dash : MonoBehaviour
             StartCoroutine(DoDash());
             pressedDash = false;
         }
-        //
         if(isDashing)
         {
             transform.position += new Vector3(xdirect*pb.DashStrength*0.1f, 0, 0);
@@ -51,6 +51,8 @@ public class Dash : MonoBehaviour
     }
     IEnumerator DoDash()
     {
+        canDash = false;
+        isDashing = true;
         //can't use jet or shot or jump
         halt.HaltSpecific(HaltMovement.Comps.Jet);
         halt.HaltSpecific(HaltMovement.Comps.Shooting);
@@ -67,6 +69,9 @@ public class Dash : MonoBehaviour
         halt.ResumeSpecific(HaltMovement.Comps.Jet);
         halt.ResumeSpecific(HaltMovement.Comps.Shooting);
         halt.ResumeSpecific(HaltMovement.Comps.Jump);
+        //wait before enabling dash again
+        yield return new WaitForSeconds(pb.DashCooldown);
+        canDash = true;
 
     }
 }

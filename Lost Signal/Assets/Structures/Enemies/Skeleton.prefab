@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 7192176082981679632}
   m_Layer: 12
   m_Name: Skeleton
-  m_TagString: Enemy
+  m_TagString: Skeleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   MaxHealth: 50
   health: 0
   DealDamage: 10
-  HitInterval: 0.25
+  HitInterval: 0.5
 --- !u!114 &4616104835234385180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133c1f2d65f4a734eade4294a40bc2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitBySpecial: 0
   standardCollider: {fileID: 8357844368461092106}
 --- !u!61 &3309304742893480292
 BoxCollider2D:

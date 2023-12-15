@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     [Header("Pathfinding")]
-    public Transform target;
+    private Transform target;
     public float activateDistance = 50f;
     public float pathUpdateSeconds = 0.5f;
 
@@ -48,7 +48,8 @@ public class EnemyAI : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        
+        target = GameObject.FindWithTag("Player").transform;
+
         isJumping = false;
         isInAir = false;
         isOnCoolDown = false; 
