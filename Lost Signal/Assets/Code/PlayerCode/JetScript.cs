@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,13 @@ public class JetScript : MonoBehaviour
     PlayerBehavior pb;
     Rigidbody2D rb;
     PlayerMovement plm;
+    JumpScript jmp;
     [SerializeField] BarFuncs bar;
     //private float JetStrength;
     //Variables
     bool jetPressed;
     bool lastJetPressed;
-    public bool jetting;
+    [NonSerialized] public bool jetting;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class JetScript : MonoBehaviour
         pb = GetComponent<PlayerBehavior>();
         rb = GetComponent<Rigidbody2D>();
         plm = GetComponent<PlayerMovement>();
+        jmp = GetComponent<JumpScript>();
         //JetStrength = pb.JetPackStrength;
         pb.JetTimeCounter = pb.JetTime;
         //jet max value
@@ -31,7 +34,7 @@ public class JetScript : MonoBehaviour
     void Update()
     {
         
-        if(Input.GetButton("Jetpack"))
+        if(Input.GetButton("Jetpack") && !jmp.Jump)
         {
             jetPressed = true;
             if(pb.JetTimeCounter < 0)

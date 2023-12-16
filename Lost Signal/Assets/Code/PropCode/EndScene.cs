@@ -12,10 +12,12 @@ public class EndScene : MonoBehaviour
     {
         image = transform.GetChild(0).gameObject;
         image.SetActive(false);
+        Debug.Log("change");
     }
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.gameObject.name == "Player")
+        Debug.Log("change");
+        if (other.gameObject.name == "Player")
         {
             image.SetActive(true);
             Invoke("ChangeScene", 3f);
@@ -23,6 +25,7 @@ public class EndScene : MonoBehaviour
     }
     void ChangeScene()
     {
+        
         SceneManager.LoadScene(1);
     }
 }

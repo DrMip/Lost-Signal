@@ -117,7 +117,8 @@ public class RaycastShooting : MonoBehaviour
             lineRenderer.SetPosition(0, new Vector2(transform.position.x + xLocation, transform.position.y - Yoffset));
             lineRenderer.SetPosition(1, new Vector2(ray.point.x, ray.point.y));
         }
-
+        //play sound
+        FindAnyObjectByType<AudioManager>().Play("Shooting");
         //draw line for 0.02 seconds
         lineRenderer.enabled = true;
         Invoke("disableLineRenderer", 0.05f);

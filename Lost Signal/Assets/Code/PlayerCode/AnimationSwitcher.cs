@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
+using System.Security;
 using System.Security.Cryptography;
 using UnityEngine;
 
@@ -28,6 +30,8 @@ public class AnimationSwitcher : MonoBehaviour
     }
     private bool[] ActionState = new bool[2];
     private bool[] LastActionState = new bool[2];
+    private string[] sounds = { "Walk", "Jet" };
+    private bool crRunning;
     [Tooltip("1 is Running, 2 is Jetting")]
     [SerializeField] List<ParticleSystem> Particles = new();
     //strings
@@ -69,15 +73,8 @@ public class AnimationSwitcher : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        //make the actionState for running array 0
-        ActionState[(int)Action.Running] = false;
-        //checks if needs to jet
-        if(js.jetting)
-            ActionState[(int)Action.Jeting] = true;
-        else
-            ActionState[(int)Action.Jeting] = false;
-        
+    {
+        if (!crRunning) StartCoroutine(HandleDelayedComputation());
 
 
         if (sa.wrathHeal.isDoingSpecial)
@@ -133,25 +130,54 @@ public class AnimationSwitcher : MonoBehaviour
                 StateChanger(PLAYER_FALLING_DOWN);
             }
         }
-        Debug.Log(ActionState[(int)Action.Jeting]);
-        //handling particles
-        ParticleHandler((int)Action.Running);
-        ParticleHandler((int)Action.Jeting);
-
 
     }
+    //allows the computer to wait more then 1 frame in order to get information is the player stopped or continued moving 
+    IEnumerator HandleDelayedComputation()
+    {
+        crRunning = true;
+        //reset running
+        ActionState[(int)Action.Running] = false;
 
+        if (js.jetting)
+            ActionState[(int)Action.Jeting] = true;
+        else
+            ActionState[(int)Action.Jeting] = false;
+
+        //wait for 0.03 seconds to register if stoped running
+        yield return new WaitForSecondsRealtime(0.04f);
+
+
+        Debug.Log(ActionState[(int)Action.Jeting]);
+        FXHandler((int)Action.Running);
+        FXHandler((int)Action.Jeting);
+        crRunning = false;
+    }
     //particles
-    void ParticleHandler(int indexToCheck)
+    void FXHandler(int indexToCheck)
     {
         //check if needs to be changed
         if (ActionState[indexToCheck] == LastActionState[indexToCheck]) return;
         //play if now wants to run, play
         if (ActionState[indexToCheck] == true)
+        {
+            //run particle
             Particles[indexToCheck].Play();
+            //play sound
+            FindAnyObjectByType<AudioManager>().Play(sounds[indexToCheck]);
+        }
+
         //else stop
         else
+        {
+            //stop particle
             Particles[indexToCheck].Stop();
+
+            //stop sound
+            FindAnyObjectByType<AudioManager>().Stop(sounds[indexToCheck]);
+
+        }
+            
         //remember state
         LastActionState[indexToCheck] = ActionState[indexToCheck];
     }

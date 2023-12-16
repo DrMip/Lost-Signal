@@ -5780,7 +5780,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.9999234, w: 0.012381591}
   m_LocalPosition: {x: -0.007, y: -0.161, z: 0}
-  m_LocalScale: {x: 0.07387516, y: 0.19244638, z: 1.2299273}
+  m_LocalScale: {x: 0.10643932, y: 0.19244638, z: 1.2299273}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1084391172}
@@ -6749,7 +6749,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 70
+      scalar: 20
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -16293,7 +16293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882cd18645fc593438208d6fb0015081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Jump: 0
   delayedIsGrounded: 0
 --- !u!114 &1171915309
 MonoBehaviour:
@@ -16361,7 +16360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 875743257}
-  jetting: 0
 --- !u!58 &1171915312
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22328,6 +22326,107 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588226950}
   m_CullTransparentMesh: 1
+--- !u!1 &1618445934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618445936}
+  - component: {fileID: 1618445935}
+  m_Layer: 0
+  m_Name: AudioHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1618445935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618445934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d53b548e265144a9b2ed5c1f84560e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Walk
+    clip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+    volume: 0.186
+    pitch: 0.7
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 1
+  - name: Jet
+    clip: {fileID: 8300000, guid: a51ac361502ef454187e1b0088345a3c, type: 3}
+    volume: 0.6
+    pitch: 0.54
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Dash
+    clip: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+    volume: 0.8
+    pitch: 0.85
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Jump
+    clip: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Dialogue
+    clip: {fileID: 8300000, guid: 89e6bc608da7b47d4914f3d9c2484e48, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    volumeVariance: 0.1
+    pitchVariance: 0.3
+    loop: 0
+  - name: Shooting
+    clip: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Healing
+    clip: {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Explode
+    clip: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
+    volume: 0.8
+    pitch: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+--- !u!4 &1618445936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618445934}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1624882145
 GameObject:
   m_ObjectHideFlags: 0
@@ -29245,6 +29344,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 673324163}
+  - {fileID: 1618445936}
   - {fileID: 1461266964}
   - {fileID: 519420032}
   - {fileID: 1171915305}

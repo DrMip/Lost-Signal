@@ -113,7 +113,8 @@ public class PlayerHealthAndWrath : MonoBehaviour
         gameoverEnter.GetComponent<Text>().color = new Color(Entercolor.r,Entercolor.g,Entercolor.b, 0);
         GameOver.SetActive(false);
         halt.ResumeAll();
-        enemySpawning.SpawnAllEnemies();
+        if(enemySpawning != null) //if has enemies in scene
+            enemySpawning.SpawnAllEnemies();
         cr_GameOver_running = false;
 
     }

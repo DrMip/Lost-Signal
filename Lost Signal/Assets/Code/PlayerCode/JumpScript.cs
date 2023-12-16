@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class JumpScript : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerBehavior pb;
 
-    public bool Jump;
+    [NonSerialized] public bool Jump;
     private float delayJump = 0.3f;
     private bool JumpWasPressed;
 
@@ -113,7 +114,6 @@ public class JumpScript : MonoBehaviour
             {
                     isInJump = true;
                     Jump = true;
-
             }
         }
         WasDelayGrounded = delayedIsGrounded;

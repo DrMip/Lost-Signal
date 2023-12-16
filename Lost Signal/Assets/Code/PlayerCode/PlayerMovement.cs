@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     bool lookingRight = true;
     //variables for jumping
     //private float jumpStrength;
-    bool jetting;
+    //bool jetting;
     
 
 
@@ -64,12 +64,12 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         }
         //if is pressing jet, and is registed as grounded and has jetpower say jetting is true
-        if(Input.GetButton("Jetpack") && jmp.delayedIsGrounded && pb.JetTimeCounter != 0)
+/*        if(Input.GetButton("Jetpack") && jmp.delayedIsGrounded && pb.JetTimeCounter != 0)
         {
             jetting = true;
         }
         else
-            jetting = false;
+            jetting = false;*/
         
     }
     // Update is called once per frame
@@ -83,9 +83,10 @@ public class PlayerMovement : MonoBehaviour
             transform.position += new Vector3(movement*pb.MovementSpeed* 0.1f , 0, 0);
         }
         //if jump and not jetting
-        if(jmp.Jump && !jetting)
+        if(jmp.Jump)
         {
             rb.AddForce(Vector2.up * pb.JumpStrength * 100, ForceMode2D.Impulse);
+            FindAnyObjectByType<AudioManager>().Play("Jump");
             jmp.Jump = false;
         }
         else

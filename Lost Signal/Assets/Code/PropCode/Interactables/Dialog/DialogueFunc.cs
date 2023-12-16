@@ -120,10 +120,11 @@ public class DialogueFunc : MonoBehaviour
         }
 
     }
-    //skiping
+    
     private void Update() 
     {
-        if(dialogue_running)
+        //skiping
+        if (dialogue_running)
         {
             //run the counter
             if(Input.GetKey(KeyCode.Return))
@@ -194,6 +195,7 @@ public class DialogueFunc : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
             //add text
             textObject.text = line.Speech;
+            FindAnyObjectByType<AudioManager>().Play("Dialogue");
             //wait for read
             yield return new WaitForSeconds(1f);  
             //Add enter option

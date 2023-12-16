@@ -55,6 +55,8 @@ public class SpecialAttacks : MonoBehaviour
                     if (pb.health > pb.MaxHealth) pb.health = pb.MaxHealth;
 
                     pb.wrath -= NeededWrath;
+                    //play sound
+                    FindObjectOfType<AudioManager>().Play("Healing");
                 }
                 //reset all
                 particle.Stop();
@@ -96,7 +98,6 @@ public class SpecialAttacks : MonoBehaviour
                 {
                     if (colliders[i].gameObject.layer == LayerMask.NameToLayer(enemyLayer) && !hits.Contains(colliders[i].gameObject))
                     {
-                        Debug.Log(colliders[i].gameObject.name);
                         hits.Add(colliders[i].gameObject);
                     }
 
@@ -108,6 +109,8 @@ public class SpecialAttacks : MonoBehaviour
                     go.GetComponent<EnemyHealth>().hitBySpecial = true;
                 }
                 pb.wrath -= NeededWrath;
+                //play Sound
+                FindObjectOfType<AudioManager>().Play("Explode");
                 //particle effects
                 particle.Play();
                 //reset speed
@@ -162,7 +165,7 @@ public class SpecialAttacks : MonoBehaviour
         //explode
         if (Input.GetKeyDown(KeyCode.E) && !anySpecialActive) // if I press Q, and not already healing then WrathHeal
         {
-            Debug.Log("Explode");
+            //Debug.Log("Explode");
             StartCoroutine(explode.DoSpecial());
         }
 

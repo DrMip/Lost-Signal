@@ -41,6 +41,7 @@ public class Dash : MonoBehaviour
         //if pressed Start DoDash coroutine (freeze y movement)
         if(pressedDash)
         {
+
             StartCoroutine(DoDash());
             pressedDash = false;
         }
@@ -53,6 +54,8 @@ public class Dash : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        //Play Sound
+        FindAnyObjectByType<AudioManager>().Play("Dash");
         //can't use jet or shot or jump
         halt.HaltSpecific(HaltMovement.Comps.Jet);
         halt.HaltSpecific(HaltMovement.Comps.Shooting);
