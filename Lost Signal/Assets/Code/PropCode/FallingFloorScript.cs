@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 
 public class FallingFloorScript : MonoBehaviour
 {
+
     //animation for being Idle when in cams
     Animator anim;
     //Halting
@@ -16,6 +17,10 @@ public class FallingFloorScript : MonoBehaviour
     float shakeTimeCounter = 0;
     Vector3 initialPos;
     bool cr_running;
+
+    //Theme changer
+    [SerializeField] AudioManager.ThemeSetter ThemeSetter = new AudioManager.ThemeSetter();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +34,8 @@ public class FallingFloorScript : MonoBehaviour
     {
         if(other.gameObject.name == "Player" && !cr_running)
         {
-            halt.HaltAll(); 
+            halt.HaltAll();
+            ThemeSetter.Send();//kill the music
             Invoke("CollapseShell", shakeDelay);
         }
     }

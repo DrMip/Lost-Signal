@@ -86,7 +86,8 @@ public class PlayerMovement : MonoBehaviour
         if(jmp.Jump)
         {
             rb.AddForce(Vector2.up * pb.JumpStrength * 100, ForceMode2D.Impulse);
-            FindAnyObjectByType<AudioManager>().Play("Jump");
+            AudioManager mana = FindObjectOfType<AudioManager>();
+            mana.Play("Jump", mana.sounds);
             jmp.Jump = false;
         }
         else

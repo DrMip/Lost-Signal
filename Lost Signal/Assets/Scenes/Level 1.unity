@@ -16309,7 +16309,7 @@ MonoBehaviour:
   MaxHealth: 100
   health: 0
   MaxWrath: 100
-  wrath: 0
+  wrath: 10
   AddedWrathOnDeath: 20
   MovementSpeed: 1.5
   JumpStrength: 3.5
@@ -16323,11 +16323,12 @@ MonoBehaviour:
   JetTime: 1
   JetTimeCounter: 0
   JetRecoverRatio: 0.5
+  JetCooldown: 0.5
   DashStrength: 1.5
   DashDuration: 0.2
   DashCooldown: 1
   DashDamage: 20
-  ShotDamage: 5
+  ShotDamage: 7
 --- !u!114 &1171915310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16524,18 +16525,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wrathHeal:
-    NeededWrath: 20
+    NeededWrath: 30
     Animation: Player_Heal
     SpecialSpeed: 0
     healAmount: 30
     HealTime: 1
     particle: {fileID: 1057989516}
   explode:
-    NeededWrath: 20
+    NeededWrath: 40
     Animation: Player_Explode
     SpecialSpeed: 0
     ExplodeRadius: 3
-    Damage: 20
+    Damage: 30
     particle: {fileID: 1787712789}
     enemyLayer: Enemies
     TimeToExplode: 0.5
@@ -16704,6 +16705,78 @@ PrefabInstance:
       propertyPath: conversations.Array.data[0].lines.Array.data[0]
       value: '#Shit'
       objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1618445935}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: triggerSet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: triggerIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: Ttrigger.manager
+      value: 
+      objectReference: {fileID: 1618445935}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: Ttrigger.SetTheme
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: Ttrigger.ThemeDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: Ttrigger.ThemeIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: Ttrigger.triggerSet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: ThemeSetter.SetTheme
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: ThemeSetter.StopStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: Ttrigger.triggerIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: multipleConversations
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: ThemeSetter.ThemeDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: ThemeSetter.ThemeIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: _OnDialogueEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: _OnDialogueEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: _OnDialogueEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1618445934}
+    - target: {fileID: 2776691696013488575, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
+      propertyPath: _OnDialogueEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5486641606839806149, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -16746,7 +16819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6133980792833502404, guid: 5423e532ce229934b97cf64482f66af9, type: 3}
       propertyPath: m_Name
-      value: TriggerDialogue
+      value: TriggerDialogueStart
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22372,7 +22445,7 @@ MonoBehaviour:
     loop: 0
   - name: Dash
     clip: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
-    volume: 0.8
+    volume: 1
     pitch: 0.85
     volumeVariance: 0.1
     pitchVariance: 0.1
@@ -22387,7 +22460,7 @@ MonoBehaviour:
   - name: Dialogue
     clip: {fileID: 8300000, guid: 89e6bc608da7b47d4914f3d9c2484e48, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1.1
     volumeVariance: 0.1
     pitchVariance: 0.3
     loop: 0
@@ -22412,6 +22485,28 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     loop: 0
+  - name: Death
+    clip: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  themes:
+  - name: Theme 1
+    clip: {fileID: 8300000, guid: f5ee21cf8fb714d6492f4bd36526832c, type: 3}
+    volume: 1
+    pitch: 1
+    volumeVariance: 0
+    pitchVariance: 0
+    loop: 1
+  - name: Theme 2
+    clip: {fileID: 8300000, guid: 6cb9ff74a536944baab35afe99fc17ba, type: 3}
+    volume: 1
+    pitch: 1
+    volumeVariance: 0
+    pitchVariance: 0
+    loop: 1
 --- !u!4 &1618445936
 Transform:
   m_ObjectHideFlags: 0
@@ -28427,7 +28522,7 @@ GameObject:
   - component: {fileID: 1862298530}
   - component: {fileID: 1862298529}
   m_Layer: 5
-  m_Name: BackgroundFill
+  m_Name: BackgroundWrathFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28465,7 +28560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.2584905, b: 0.2584905, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

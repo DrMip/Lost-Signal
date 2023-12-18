@@ -15,6 +15,9 @@ public class JetScript : MonoBehaviour
     //Variables
     bool jetPressed;
     bool lastJetPressed;
+
+    bool canJet = true;
+    bool enableRunning;
     [NonSerialized] public bool jetting;
 
     // Start is called before the first frame update
@@ -34,7 +37,7 @@ public class JetScript : MonoBehaviour
     void Update()
     {
         
-        if(Input.GetButton("Jetpack") && !jmp.Jump)
+        if(Input.GetButton("Jetpack") && !jmp.Jump && canJet)
         {
             jetPressed = true;
             if(pb.JetTimeCounter < 0)
@@ -47,6 +50,7 @@ public class JetScript : MonoBehaviour
         else
         {
             jetPressed = false;
+
             if(pb.JetTimeCounter > pb.JetTime)
                 pb.JetTimeCounter = pb.JetTime;
             if(pb.JetTimeCounter < pb.JetTime  && plm.isGrounded)
@@ -54,7 +58,13 @@ public class JetScript : MonoBehaviour
                 pb.JetTimeCounter += pb.JetRecoverRatio*Time.deltaTime;
             }
         }
-        if(lastJetPressed == false && jetPressed == true)
+        if (Input.GetButtonUp("Jetpack"))
+        {
+            canJet = false;
+            //enable jet if not pressed
+            if (!canJet && !enableRunning) StartCoroutine(EnableJet());
+        }
+        if (lastJetPressed == false && jetPressed == true)
         {
             rb.velocity = Vector2.up*2;
         }
@@ -74,6 +84,14 @@ public class JetScript : MonoBehaviour
         }
         else
             jetting = false;
+    }
+
+    IEnumerator EnableJet()
+    {
+        enableRunning = true;
+        yield return new WaitForSeconds(pb.JetCooldown);
+        canJet = true;
+        enableRunning = false;
     }
 
 }

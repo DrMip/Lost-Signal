@@ -37,6 +37,7 @@ public class PlayerBehavior : MonoBehaviour
     public float JetTime;
     public float JetTimeCounter;
     public float JetRecoverRatio = 0.5f;
+    public float JetCooldown;
     [Header("Dash")]
     public float DashStrength;
     public float DashDuration;
@@ -46,21 +47,4 @@ public class PlayerBehavior : MonoBehaviour
     public int DashDamage;
 
     public int ShotDamage;
-
-
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // for centeralize main variables and functions
-    void Update()
-    {
-        //checks if grounded
-        //isGrounded = Physics2D.CircleCast(new Vector2(groundSensor.position.x, groundSensor.position.y), 0.1f, Vector2.zero, 0, LayerMask.GetMask("Middleground"));
-    }
 }

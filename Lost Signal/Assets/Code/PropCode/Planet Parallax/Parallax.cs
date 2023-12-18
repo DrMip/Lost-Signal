@@ -29,7 +29,7 @@ public class Parallax : MonoBehaviour
         startpos = player.transform.position.x;
         doParallax = true;
         pullbackValue = (player.transform.localScale.x > 0) ? pullbackLeft: pullbackRight;
-        Debug.Log(pullbackValue);
+        //Debug.Log(pullbackValue);
 
     }
     // Update is called once per frame

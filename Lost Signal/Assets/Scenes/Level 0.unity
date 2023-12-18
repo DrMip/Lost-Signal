@@ -913,9 +913,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02802752ef9a0574784b732734e86bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShakeTime: 2
+  ShakeTime: 4
   shakeDelay: 0.5
   shakeLen: 0.1
+  ThemeSetter:
+    SetTheme: 1
+    ThemeIndex: 0
+    StopStart: 0
+    ThemeDelay: 0.6
 --- !u!1 &208184303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,6 +2488,7 @@ MonoBehaviour:
   JetTime: 1
   JetTimeCounter: 0
   JetRecoverRatio: 0.5
+  JetCooldown: 0
   DashStrength: 1.5
   DashDuration: 0.2
   DashCooldown: 1
@@ -12381,37 +12387,6 @@ Transform:
   - {fileID: 899647802}
   m_Father: {fileID: 404623102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &764376861
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 764376862}
-  m_Layer: 0
-  m_Name: Gates
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &764376862
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764376861}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.4, y: 8.4, z: 8.4}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1362976251}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &798007387
 GameObject:
   m_ObjectHideFlags: 0
@@ -12521,6 +12496,129 @@ PolygonCollider2D:
       - {x: 64.79042, y: 17.650492}
       - {x: 43.511406, y: 17.619238}
   m_UseDelaunayMesh: 0
+--- !u!1 &819217981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 819217983}
+  - component: {fileID: 819217982}
+  m_Layer: 0
+  m_Name: AudioHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &819217982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819217981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d53b548e265144a9b2ed5c1f84560e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Walk
+    clip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+    volume: 0.186
+    pitch: 0.7
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 1
+  - name: Jet
+    clip: {fileID: 8300000, guid: a51ac361502ef454187e1b0088345a3c, type: 3}
+    volume: 0.6
+    pitch: 0.54
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Dash
+    clip: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+    volume: 1
+    pitch: 0.85
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Jump
+    clip: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Dialogue
+    clip: {fileID: 8300000, guid: 89e6bc608da7b47d4914f3d9c2484e48, type: 3}
+    volume: 0.5
+    pitch: 1.1
+    volumeVariance: 0.1
+    pitchVariance: 0.3
+    loop: 0
+  - name: Shooting
+    clip: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Healing
+    clip: {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Explode
+    clip: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
+    volume: 0.8
+    pitch: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  - name: Death
+    clip: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    loop: 0
+  themes:
+  - name: Theme 1
+    clip: {fileID: 8300000, guid: f5ee21cf8fb714d6492f4bd36526832c, type: 3}
+    volume: 1
+    pitch: 1
+    volumeVariance: 0
+    pitchVariance: 0
+    loop: 1
+  - name: Theme 2
+    clip: {fileID: 8300000, guid: 6cb9ff74a536944baab35afe99fc17ba, type: 3}
+    volume: 1
+    pitch: 1
+    volumeVariance: 0
+    pitchVariance: 0
+    loop: 1
+--- !u!4 &819217983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819217981}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &842044352
 GameObject:
   m_ObjectHideFlags: 0
@@ -24337,107 +24435,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1306465392
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1306465394}
-  - component: {fileID: 1306465393}
-  m_Layer: 0
-  m_Name: AudioHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1306465393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306465392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08d53b548e265144a9b2ed5c1f84560e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: Walk
-    clip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
-    volume: 0.186
-    pitch: 0.7
-    volumeVariance: 0.1
-    pitchVariance: 0.1
-    loop: 1
-  - name: Jet
-    clip: {fileID: 8300000, guid: a51ac361502ef454187e1b0088345a3c, type: 3}
-    volume: 0.6
-    pitch: 0.54
-    volumeVariance: 0.1
-    pitchVariance: 0.1
-    loop: 0
-  - name: Dash
-    clip: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
-    volume: 0.8
-    pitch: 0.85
-    volumeVariance: 0.1
-    pitchVariance: 0.1
-    loop: 0
-  - name: Jump
-    clip: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
-    volume: 0.5
-    pitch: 0.9
-    volumeVariance: 0.1
-    pitchVariance: 0.1
-    loop: 0
-  - name: Dialogue
-    clip: {fileID: 8300000, guid: 89e6bc608da7b47d4914f3d9c2484e48, type: 3}
-    volume: 0.5
-    pitch: 0.9
-    volumeVariance: 0.1
-    pitchVariance: 0.3
-    loop: 0
-  - name: Shooting
-    clip: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
-    volume: 0.5
-    pitch: 0.9
-    volumeVariance: 0.1
-    pitchVariance: 0.1
-    loop: 0
-  - name: Healing
-    clip: {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
-    volume: 0.5
-    pitch: 1
-    volumeVariance: 0.1
-    pitchVariance: 0.1
-    loop: 0
-  - name: Explode
-    clip: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
-    volume: 0.8
-    pitch: 1
-    volumeVariance: 0.1
-    pitchVariance: 0.1
-    loop: 0
---- !u!4 &1306465394
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306465392}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1308527494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8563409773893265288, guid: 20e4849b1670630459dcba539f2bfef6, type: 3}
@@ -24581,7 +24578,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 764376862}
   - {fileID: 132791940}
   - {fileID: 614177705}
   - {fileID: 66227191}
@@ -38198,7 +38194,7 @@ GameObject:
   - component: {fileID: 1862298530}
   - component: {fileID: 1862298529}
   m_Layer: 5
-  m_Name: BackgroundFill
+  m_Name: BackgroundWrathFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39716,6 +39712,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multipleConversations: 0
   delayBetweenDialogues: 1
+  ThemeSetter:
+    SetTheme: 1
+    ThemeIndex: 0
+    StopStart: 1
+    ThemeDelay: 0.1
 --- !u!1001 &5647789860547769423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39863,6 +39864,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multipleConversations: 1
   delayBetweenDialogues: 1
+  ThemeSetter:
+    SetTheme: 0
+    ThemeIndex: 0
+    StopStart: 0
+    ThemeDelay: 0
 --- !u!114 &7017096245270303497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40328,7 +40334,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1461266964}
-  - {fileID: 1306465394}
+  - {fileID: 819217983}
   - {fileID: 519420032}
   - {fileID: 404623102}
   - {fileID: 295759036}

@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a680be234cddc41acd16f24f200737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 50
+  MaxHealth: 25
   health: 0
   DealDamage: 10
   HitInterval: 0.5
@@ -374,7 +374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bed77edb937bfa4e81a59557b741329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   activateDistance: 50
   pathUpdateSeconds: 0.5
   speed: 5

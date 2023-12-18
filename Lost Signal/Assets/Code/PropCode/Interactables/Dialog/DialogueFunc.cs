@@ -20,6 +20,7 @@ public class DialogueFunc : MonoBehaviour
     //skip variables
     float skipSpeed = 1f;
     float skipOpaqueCounter = 0;
+    bool skipped = false;
     //variables for functionality
     [NonSerialized] public bool dialogue_running = false;
 
@@ -143,6 +144,7 @@ public class DialogueFunc : MonoBehaviour
                 if(skipOpaqueCounter > 1.2f)
                 {
                     SkipText.color = new Color(SkipText.color.r, SkipText.color.g, SkipText.color.b, 1);
+                    skipped = true;
                     Invoke("EndDialogue", 0.2f);
                     SkipText.color = new Color(SkipText.color.r, SkipText.color.g, SkipText.color.b, 0);
                 }
@@ -171,6 +173,10 @@ public class DialogueFunc : MonoBehaviour
         //dialogue loop
         foreach(DialogEntity line in conversationsList[conversationIndex-1])
         {
+            if(skipped)
+            {
+                break;
+            }
             //clear
             textObject.text = "";
             nameObject.text = "";
@@ -195,7 +201,10 @@ public class DialogueFunc : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
             //add text
             textObject.text = line.Speech;
-            FindAnyObjectByType<AudioManager>().Play("Dialogue");
+
+            AudioManager mana = FindObjectOfType<AudioManager>();
+            mana.Play("Dialogue", mana.sounds);
+
             //wait for read
             yield return new WaitForSeconds(1f);  
             //Add enter option

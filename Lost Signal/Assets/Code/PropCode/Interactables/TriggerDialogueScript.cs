@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TriggerDialogueScript : MonoBehaviour
 {
+
     [SerializeField] bool multipleConversations;
     DialogueFunc dialogueFunc;
     HaltMovement halt;
@@ -15,6 +17,10 @@ public class TriggerDialogueScript : MonoBehaviour
     bool restartDialogue = true;
     //conversation counter
     private int convCounter;
+
+    //event
+    bool LastFrameDialogue_running;
+    [SerializeField] AudioManager.ThemeSetter ThemeSetter = new AudioManager.ThemeSetter();
 
     private void Awake() 
     {
@@ -52,6 +58,12 @@ public class TriggerDialogueScript : MonoBehaviour
             }
             
         }
+        if (LastFrameDialogue_running && !dialogueFunc.dialogue_running && convCounter <= 1)//if at the end of dialogue
+        {
+            ThemeSetter.Send();
+        }
+
+        LastFrameDialogue_running = dialogueFunc.dialogue_running;
         //Debug.Log(convCounter);
     }
     private void OnTriggerStay2D(Collider2D other)

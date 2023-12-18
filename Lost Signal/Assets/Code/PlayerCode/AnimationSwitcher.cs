@@ -148,7 +148,6 @@ public class AnimationSwitcher : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.04f);
 
 
-        Debug.Log(ActionState[(int)Action.Jeting]);
         FXHandler((int)Action.Running);
         FXHandler((int)Action.Jeting);
         crRunning = false;
@@ -164,7 +163,8 @@ public class AnimationSwitcher : MonoBehaviour
             //run particle
             Particles[indexToCheck].Play();
             //play sound
-            FindAnyObjectByType<AudioManager>().Play(sounds[indexToCheck]);
+            AudioManager mana = FindObjectOfType<AudioManager>();
+            mana.Play(sounds[indexToCheck], mana.sounds);
         }
 
         //else stop
@@ -174,7 +174,8 @@ public class AnimationSwitcher : MonoBehaviour
             Particles[indexToCheck].Stop();
 
             //stop sound
-            FindAnyObjectByType<AudioManager>().Stop(sounds[indexToCheck]);
+            AudioManager mana = FindObjectOfType<AudioManager>();
+            mana.Stop(sounds[indexToCheck], mana.sounds);
 
         }
             

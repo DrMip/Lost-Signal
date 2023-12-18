@@ -85,6 +85,9 @@ public class PlayerHealthAndWrath : MonoBehaviour
     {
         cr_GameOver_running = true;
         yield return new WaitForSeconds(0.2f);
+        //play sound
+        AudioManager mana = FindObjectOfType<AudioManager>();
+        mana.Play("Death", mana.sounds);
         //stop moving
         halt.HaltAll();
         yield return new WaitForSeconds(0.8f);
