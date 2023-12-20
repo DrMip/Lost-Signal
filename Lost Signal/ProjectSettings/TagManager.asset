@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
   - Shot
   - Environment
   - Skeleton
+  - Bat
   layers:
   - Default
   - TransparentFX

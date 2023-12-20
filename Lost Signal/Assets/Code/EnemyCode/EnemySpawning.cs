@@ -8,7 +8,8 @@ public class EnemySpawning : MonoBehaviour
     Dictionary<string,GameObject> enemyTypes = new Dictionary<string, GameObject>();
     //prefabs
     [SerializeField] GameObject skeletonPrefab;
-   
+    [SerializeField] GameObject batPrefab;
+
 
     public class Enemy
     {
@@ -23,6 +24,7 @@ public class EnemySpawning : MonoBehaviour
     {
         enemies = CreateEnemyList();
         enemyTypes.Add("Skeleton", skeletonPrefab);
+        enemyTypes.Add("Bat", batPrefab);
     }
 
 
@@ -73,7 +75,8 @@ public class EnemySpawning : MonoBehaviour
         }
         foreach(Enemy enemy in enemies)
         {
-            enemy.enemyObject = Instantiate(enemyTypes["Skeleton"], enemy.spawnPosition, Quaternion.identity);
+
+            enemy.enemyObject = Instantiate(enemyTypes[enemy.enemyType], enemy.spawnPosition, Quaternion.identity);
         }
     }
 }

@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
 {
     //components of the player
     private Rigidbody2D rb;
-    private Animator ani;
     private JumpScript jmp;
     private PlayerBehavior pb;
     
@@ -36,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        ani = GetComponent<Animator>();
         jmp = GetComponent<JumpScript>();
         pb = GetComponent<PlayerBehavior>();
         //transform.position = new Vector3 (-4,0);
@@ -88,12 +86,11 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector2.up * pb.JumpStrength * 100, ForceMode2D.Impulse);
             AudioManager mana = FindObjectOfType<AudioManager>();
             mana.Play("Jump", mana.sounds);
-            jmp.Jump = false;
+            
         }
-        else
-            jmp.Jump = false;
-        
-        
+        jmp.Jump = false;
+
+
         wasGrounded = isGrounded;
     }
 

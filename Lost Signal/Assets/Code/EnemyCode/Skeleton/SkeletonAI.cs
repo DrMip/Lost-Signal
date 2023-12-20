@@ -43,6 +43,9 @@ public class EnemyAI : MonoBehaviour
     List<RaycastHit2D> rays = new List<RaycastHit2D>();
     public bool DoRoomActivation = true;
 
+    //return to poistion
+    Vector3 startPos;
+
 
     public void Start()
     {
@@ -69,8 +72,11 @@ public class EnemyAI : MonoBehaviour
             }
         }
         // now room is the room
+        
         trigger = room.GetComponent<RoomTrigger>();
         followEnabled = false;
+        //get position
+        startPos = transform.position;
 
     }
     private void Update()
@@ -88,10 +94,19 @@ public class EnemyAI : MonoBehaviour
                 entered = false;
                 exited = true;
                 followEnabled = false;
+                //return to your positions
+                Invoke("ResetPosition", 1f);
+                
             }
         
         }
 
+    }
+
+    void ResetPosition()
+    {
+        if(!trigger.PlayerInRoom) // if player hasn't returned to the room
+            transform.position = startPos;
     }
     private void FixedUpdate()
     {

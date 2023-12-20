@@ -1,26 +1,25 @@
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static EnemyHurt;
 
-public class AnimationSkeleton : MonoBehaviour
+public class BatAnimation : MonoBehaviour
 {
     //components for state
-    // pm;
-    EnemyHealth skeletonHealth;
+    [SerializeField] EnemyHealth enemyHealth;
 
     EnemyState enemyState = new EnemyState();
 
 
     //strings
     //const string SKELETON_IDLE = "Skeleton_Idle";
-    const string SKELETON_WALK = "Skeleton_Walk";
-    const string SKELETON_HURT = "Player_Shoot";
+    const string BAT_FLY = "Bat_Fly";
+    const string BAT_HURT = "This String has no meaning lol";
 
     void Start()
     {
-        
-        skeletonHealth = GetComponent<EnemyHealth>();
+
 
         //Debug.Log(defualtColor);
 
@@ -29,10 +28,11 @@ public class AnimationSkeleton : MonoBehaviour
         enemyState.rndr = GetComponent<SpriteRenderer>();
         enemyState.anim = GetComponent<Animator>();
 
-        enemyState.EnemyHurtAnim = SKELETON_HURT;
+        enemyState.EnemyHurtAnim = BAT_HURT;
         enemyState.defualtColor = enemyState.rndr.color;
-
-
+        //
+        enemyState.StateChanger(BAT_FLY);
+        //
     }
 
 
@@ -41,16 +41,17 @@ public class AnimationSkeleton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(skeletonHealth.Hurt)
+
+        if (enemyHealth.Hurt)
         {
-            enemyState.StateChanger(SKELETON_HURT);
+            enemyState.StateChanger(BAT_HURT);
             //StateChanger(SKELETON_HURT);
         }
         else
         {
-            enemyState.StateChanger(SKELETON_WALK);
+            enemyState.StateChanger(BAT_FLY);
         }
     }
 
+    
 }

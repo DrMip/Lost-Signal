@@ -1,3 +1,4 @@
+using Pathfinding;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ public class EnemyHealth : MonoBehaviour
     EnemyBehavior eb;
     GameObject player;
     SpriteRenderer rndr;
-    EnemyAI ai;
+    MonoBehaviour ai;
     //handling attacks happen once
     bool hasDashAttacked = false;
 
@@ -19,19 +20,29 @@ public class EnemyHealth : MonoBehaviour
     Color newColor;
     Color defualtColor;
     bool deathAnimRunning;
-    public bool hitBySpecial;
-    [SerializeField] BoxCollider2D standardCollider;
+    [NonSerialized] public bool hitBySpecial;
+    [SerializeField] Collider2D standardCollider;
     // Start is called before the first frame update
     void Start()
     {
         eb = GetComponent<EnemyBehavior>();
-        rndr = GetComponent<SpriteRenderer>();
-        ai = GetComponent<EnemyAI>();
+        if(!TryGetComponent<SpriteRenderer>(out rndr))
+            rndr = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        if (TryGetComponent<EnemyAI>(out _))
+        {
+            ai = GetComponent<EnemyAI>();
+        }
+
+        else if (TryGetComponent<AIPath>(out _))
+        {
+            ai = GetComponent<AIPath>();
+        }
+
         defualtColor = rndr.color;
         player = GameObject.FindWithTag("Player");
 
         ai.enabled = true;
-
+        Debug.Log(ai.gameObject.name);
         eb.health = eb.MaxHealth;
     }
 
@@ -71,6 +82,7 @@ public class EnemyHealth : MonoBehaviour
         {
             //Debug.Log("hit");
             hasDashAttacked = true;
+            if(standardCollider != null)
             standardCollider.enabled = false;
             eb.health -= player.GetComponent<PlayerBehavior>().DashDamage;
         }
@@ -89,7 +101,8 @@ public class EnemyHealth : MonoBehaviour
     {
         //dash
         hasDashAttacked = false;
-        standardCollider.enabled = true;
+        if (standardCollider != null)
+            standardCollider.enabled = true;
         //shot
         //hasShotAttacked = false;
 
