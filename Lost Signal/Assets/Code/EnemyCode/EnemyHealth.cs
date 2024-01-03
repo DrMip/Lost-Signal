@@ -42,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
         player = GameObject.FindWithTag("Player");
 
         ai.enabled = true;
-        Debug.Log(ai.gameObject.name);
+        //Debug.Log(ai.gameObject.name);
         eb.health = eb.MaxHealth;
     }
 

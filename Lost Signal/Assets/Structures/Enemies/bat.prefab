@@ -177,7 +177,7 @@ MonoBehaviour:
   MaxHealth: 100
   health: 0
   DealDamage: 10
-  HitInterval: 0.25
+  HitInterval: 0.5
 --- !u!114 &671515093410333999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +349,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2723145552503865621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133c1f2d65f4a734eade4294a40bc2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardCollider: {fileID: 0}
+  standardCollider: {fileID: 1433039974436685557}
 --- !u!58 &2132515020580799387
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -135,8 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2fc36fb20ec084a947bc2824265dff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newColor: {r: 1, g: 0.11698109, b: 0.11698109, a: 1}
-  ColorDisplayTime: 0.2
 --- !u!50 &3602514369425004373
 Rigidbody2D:
   serializedVersion: 4
@@ -242,7 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133c1f2d65f4a734eade4294a40bc2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitBySpecial: 0
   standardCollider: {fileID: 8357844368461092106}
 --- !u!61 &3309304742893480292
 BoxCollider2D:
@@ -387,5 +384,14 @@ MonoBehaviour:
   isJumping: 0
   isInAir: 0
   directionLookEnabled: 1
-  startOffset: {x: 0, y: 0, z: 0}
-  DoRoomActivation: 1
+  sight:
+    moveOnSight: 1
+    sightLength: 20
+    sightFOV: 50
+    sightAngle: 25
+    numOfSightRays: 4
+  roomActivation:
+    DoRoomActivation: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256

@@ -1,9 +1,15 @@
 ﻿using Pathfinding;
+using Pathfinding.Util;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Text;
+using System.Linq;
+using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-
+using UnityEngine.UIElements;
+using static EnemyAIFeature;
 public class EnemyAI : MonoBehaviour
 {
     [Header("Pathfinding")]
@@ -22,8 +28,9 @@ public class EnemyAI : MonoBehaviour
     public bool followEnabled = true;
     public bool jumpEnabled = true, isJumping, isInAir;
     public bool directionLookEnabled = true;
+    [Header("Move On Sight")]
+    [SerializeField] Sight sight = new Sight();
 
-    [SerializeField] Vector3 startOffset;
 
     private Path path;
     private int currentWaypoint = 0;
@@ -33,18 +40,8 @@ public class EnemyAI : MonoBehaviour
     private bool isOnCoolDown;
 
     //handle room activation
-    GameObject room;
-    RoomTrigger trigger;
-    ContactFilter2D filter;
-
-    bool entered = false;
-    bool exited = false;
-
-    List<RaycastHit2D> rays = new List<RaycastHit2D>();
-    public bool DoRoomActivation = true;
-
-    //return to poistion
-    Vector3 startPos;
+    [Header("Room Activation")]
+    public RoomActivation roomActivation;
 
 
     public void Start()
@@ -59,54 +56,13 @@ public class EnemyAI : MonoBehaviour
 
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
 
-        //get what room you are in
-        filter.NoFilter();
-        Physics2D.Raycast(new Vector2(transform.position.x,transform.position.y), Vector2.down, filter, rays);
-        foreach(RaycastHit2D ray in rays)
-        {
-            //Debug.Log(ray.transform.gameObject.layer + " " + LayerMask.GetMask("Middleground"));
-            if(ray.transform.gameObject.layer == LayerMask.NameToLayer("Room"))
-            {
-                room = ray.transform.gameObject;
-                //Debug.Log(room);
-            }
-        }
-        // now room is the room
+        //init room activation
+        roomActivation._init_(this);
         
-        trigger = room.GetComponent<RoomTrigger>();
-        followEnabled = false;
-        //get position
-        startPos = transform.position;
 
-    }
-    private void Update()
-    {
-        if(DoRoomActivation)
-        {
-            if(trigger.PlayerInRoom == true && !entered)
-            {
-                entered = true;
-                exited = false;
-                followEnabled = true;
-            }
-            if(trigger.PlayerInRoom == false && !exited)
-            {
-                entered = false;
-                exited = true;
-                followEnabled = false;
-                //return to your positions
-                Invoke("ResetPosition", 1f);
-                
-            }
-        
-        }
+        //init sight
+        sight._init_(this, pathUpdateSeconds);
 
-    }
-
-    void ResetPosition()
-    {
-        if(!trigger.PlayerInRoom) // if player hasn't returned to the room
-            transform.position = startPos;
     }
     private void FixedUpdate()
     {
@@ -118,10 +74,15 @@ public class EnemyAI : MonoBehaviour
 
     private void UpdatePath()
     {
-        if (followEnabled && TargetInDistance() && seeker.IsDone())
+        if ((followEnabled || roomActivation.didReset) && TargetInDistance() && seeker.IsDone())
         {
+            if(roomActivation.didReset) roomActivation.didReset = false;
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
+        //checks if sees player and of is in room
+        followEnabled = sight.See() && roomActivation.Check();
+
+        //does room acitvation
     }
 
     private void PathFollow()
@@ -138,7 +99,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         // See if colliding with anything
-        startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset, transform.position.z);
+        Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset, transform.position.z);
         isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
 
         // Direction Calculation
